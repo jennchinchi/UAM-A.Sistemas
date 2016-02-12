@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TiendaOnline
 {
-    public partial class WebFormProducto : System.Web.UI.Page
+    public partial class CarritoDeCompras : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

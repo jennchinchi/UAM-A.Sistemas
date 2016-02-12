@@ -38,12 +38,14 @@ body {
 }
 .wrap {
 	width:80%;
-	margin: 0 auto;
 	transition:all .2s linear;
 	-moz-transition:all .2s linear;/* firefox */
 	-webkit-transition:all .2s linear; /* safari and chrome */
 	-o-transition:all .2s linear; /* opera */
 	-ms-transition:all .2s linear;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
 }
 .header {
 	background:#23272a;
@@ -243,7 +245,7 @@ body {
 }
 .slider-text{
 	float:left;
-	width:50%;
+	width:95%;
 }
 .slider-text h2{
 	color:#e44f2b;
