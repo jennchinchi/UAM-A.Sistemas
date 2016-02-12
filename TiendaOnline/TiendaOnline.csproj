@@ -103,6 +103,7 @@
     <Content Include="images\wishlist.png" />
     <Content Include="images\zoom.png" />
     <Content Include="index.html" />
+    <Content Include="jesus.html" />
     <Content Include="js\easing.js" />
     <Content Include="js\easyResponsiveTabs.js" />
     <Content Include="js\jquery-1.9.0.min.js" />
