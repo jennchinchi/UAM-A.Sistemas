@@ -24,19 +24,21 @@
 				<a href="index.html"><img src="images/logo.png" alt="" /></a>
 				</div>
 					<div class="header_top_right">
-						<div class="search_box">
-						<span>Search</span>
-					    <form>
-					     	<input type="text" value="">
-                            <input type="submit" value="">
-					    </form>
-					    <div class="clear"></div>
-					</div>
-			</div>
-			    <div class="clear"></div>
-  		</div>   
+						<div class="search_box">  
+                            <span>Search</span>
+					        <form>
+					     	    <input type="text" value="" 
+                                <input type="submit" value=""> </input>
+					        </form>  
+						</div>
+                    </div>
+            </div>
+           <div class="clear"></div>
+
+	    <div class="clear"></div>
+
   		<div class="navigation">
-  	<a class="toggleMenu" href="#">Menu</a>
+  	    <a class="toggleMenu" href="#">Menu</a>
 		<ul class="nav">
 			<li  class="test">
 				<a href="#">Electrodomésticos</a>
@@ -164,7 +166,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="#">Deportes></a>
+				<a href="#">Deportes</a>
 				<ul>
 					<li>
 						<a href="#">Fitness</a>
@@ -243,8 +245,7 @@
 						   <ul>
 						  	   <h3>Browse All Categories</h3>
 							      <li><a href="#">Electrodomésticos</a></li>
-							      <li><a href="#">Sports Equipments</a></li>
-							      <li><a href="#">Computers & Electronics</a></li>
+							      <li><a href="#">Computadoras</a></li>
 							      <li><a href="#">Office supplies</a></li>
 							      <li><a href="#">Health & Beauty</a></li>
 							      <li><a href="#">Home & Garden</a></li>

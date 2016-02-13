@@ -60,6 +60,7 @@ body {
 .header_top_right{
 	float:right;
 	padding-top:10px;
+    height: 42px;
 }
 .search_box span{
    color:#5b5b5b;
@@ -70,6 +71,9 @@ body {
 	 position: relative;
 	 display:inline-block;
 	 padding-left:18px;
+    top: 0px;
+    left: 0px;
+    right: 54px;
 }
 .search_box form:after{
 	content:'';
