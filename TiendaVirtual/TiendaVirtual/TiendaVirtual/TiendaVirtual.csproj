@@ -416,6 +416,7 @@
     <Content Include="Views\tb_categoria\Edit.cshtml" />
     <Content Include="Views\tb_categoria\Index.cshtml" />
     <Content Include="Views\HomeAdmin\Index.cshtml" />
+    <Content Include="_MasterPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
