@@ -25,7 +25,7 @@
 				</div>
 					<div class="header_top_right">
 						<div class="search_box">  
-                            <span>Search</span>
+                            <span>Buscar</span>
 					        <form>
 					     	    <input type="text" value="" 
                                 <input type="submit" value=""> </input>
@@ -222,14 +222,12 @@
 				</ul>
 			</li>
 		</ul>
-			<span class="left-ribbon"> </span> 
-      		<span class="right-ribbon"> </span>    
 </div>
   		    <div class="header_bottom">
 			<div class="slider-text">
-			<h2>Lorem Ipsum Placerat <br/>Elementum Quistue Tunulla Maris</h2>
-			<p>Vivamus vitae augue at quam frigilla tristique sit amet<br/> acin ante sikumpre tisdin.</p>
-			<a href="#">Sitamet Tortorions</a>
+			<h2>Tienda Virtual AsoDell</h2>
+			<p>Ofrecemos gran variedad de productos para todos nuestros asociados</p>
+			<a href="#">Registro</a>
 	  	    </div>
 	  	    
 	  	    <div class="clear"></div>
@@ -246,12 +244,12 @@
 						  	   <h3>Categorias</h3>
 							      <li><a href="#">Electrodomésticos</a></li>
 							      <li><a href="#">Computadoras</a></li>
-							      <li><a href="#">Office supplies</a></li>
-							      <li><a href="#">Health & Beauty</a></li>
-							      <li><a href="#">Home & Garden</a></li>
-							      <li><a href="#">Apparel</a></li>
-							      <li><a href="#">Toys & Games</a></li>
-							      <li><a href="#">Automotive</a></li>
+							      <li><a href="#">Oficina/a></li>
+							      <li><a href="#">Salud & Belleza</a></li>
+							      <li><a href="#">Casa & Jardín</a></li>
+							      <li><a href="#">Accessorios</a></li>
+							      <li><a href="#">Juguetes</a></li>
+							      <li><a href="#">Automóvil</a></li>
 						  	 </ul>
 						</div>		
 
@@ -278,11 +276,11 @@
     <div class="footer">
    	  <div class="wrap">	
 			 <div class="copy_right">
-				<p>Template by  <a href="http://w3layouts.com" target="_blank">W3Layouts</a> </p>
+				<p>Desarrollado por InfoSoluciones </p>
 		   </div>	
 		   <div class="footer-nav">
 		   	<ul>
-		   		<li><a href="contact.html">Contact Us</a> : </li>
+		   		<li><a href="contact.html">Contacto</a> : </li>
 		   	</ul>
 		   </div>		
         </div>
