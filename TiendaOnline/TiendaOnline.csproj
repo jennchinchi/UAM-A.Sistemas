@@ -60,7 +60,6 @@
   <ItemGroup>
     <Content Include="bin\TiendaOnline.dll" />
     <Content Include="bin\TiendaOnline.pdb" />
-    <Content Include="CarritoDeCompras.aspx" />
     <Content Include="contact.html" />
     <Content Include="css\easy-responsive-tabs.css" />
     <Content Include="css\etalage.css" />
@@ -119,20 +118,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarritoDeCompras.aspx.cs">
-      <DependentUpon>CarritoDeCompras.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CarritoDeCompras.aspx.designer.cs">
-      <DependentUpon>CarritoDeCompras.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmMasterPage.Master.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmMasterPage.Master.designer.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-    </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -141,7 +126,6 @@
   <ItemGroup>
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\TiendaOnline.csprojResolveAssemblyReference.cache" />
-    <Content Include="FrmMasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
