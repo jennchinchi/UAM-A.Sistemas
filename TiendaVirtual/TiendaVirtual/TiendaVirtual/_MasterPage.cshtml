@@ -259,12 +259,15 @@
 
                     <div class="content-bottom-right">
                         <h3>Browse All Categories</h3>
-
+                        <div>
+                            @RenderBody()
+                        </div>
                         <div class="section group">
                             <form id="form1" runat="server">
                                 <div>
                                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                                         <h4>Contenido aca</h4>
+
                                     </asp:ContentPlaceHolder>
                                 </div>
                             </form>
@@ -295,9 +298,8 @@
     </script>
     <a href="#" id="toTop"> </a>
     <script type="text/javascript" src="js/navigation.js"></script>
-    <div>
-        @RenderBody()
-    </div>
+
+
 
 </body> <!------------End Body ------------>
 
