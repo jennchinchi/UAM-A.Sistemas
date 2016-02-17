@@ -60,6 +60,7 @@
   <ItemGroup>
     <Content Include="bin\TiendaOnline.dll" />
     <Content Include="bin\TiendaOnline.pdb" />
+    <Content Include="CarritoDeCompras.aspx" />
     <Content Include="contact.html" />
     <Content Include="css\easy-responsive-tabs.css" />
     <Content Include="css\etalage.css" />
@@ -115,11 +116,16 @@
     <Content Include="obj\Debug\TiendaOnline.dll" />
     <Content Include="obj\Debug\TiendaOnline.pdb" />
     <Content Include="preview.html" />
-    <Content Include="Update_disponible.aspx" />
     <Content Include="Web.config" />
-    <Content Include="WebFormProducto.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarritoDeCompras.aspx.cs">
+      <DependentUpon>CarritoDeCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarritoDeCompras.aspx.designer.cs">
+      <DependentUpon>CarritoDeCompras.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FrmMasterPage.Master.cs">
       <DependentUpon>FrmMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,20 +137,6 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Update_disponible.aspx.cs">
-      <DependentUpon>Update_disponible.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Update_disponible.aspx.designer.cs">
-      <DependentUpon>Update_disponible.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebFormProducto.aspx.cs">
-      <DependentUpon>WebFormProducto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebFormProducto.aspx.designer.cs">
-      <DependentUpon>WebFormProducto.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
