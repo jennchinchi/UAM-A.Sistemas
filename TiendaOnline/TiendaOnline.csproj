@@ -61,7 +61,6 @@
     <Content Include="bin\TiendaOnline.dll" />
     <Content Include="bin\TiendaOnline.pdb" />
     <Content Include="CarritoDeCompras.aspx" />
-    <Content Include="contact.html" />
     <Content Include="css\easy-responsive-tabs.css" />
     <Content Include="css\etalage.css" />
     <Content Include="css\style.css" />
@@ -103,7 +102,6 @@
     <Content Include="images\tag.png" />
     <Content Include="images\wishlist.png" />
     <Content Include="images\zoom.png" />
-    <Content Include="index.html" />
     <Content Include="js\easing.js" />
     <Content Include="js\easyResponsiveTabs.js" />
     <Content Include="js\jquery-1.9.0.min.js" />
@@ -115,7 +113,6 @@
     <Content Include="obj\Debug\TiendaOnline.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TiendaOnline.dll" />
     <Content Include="obj\Debug\TiendaOnline.pdb" />
-    <Content Include="preview.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
