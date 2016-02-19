@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace TiendaVirtual.Controllers
 {
-    public class HomeAdminController : Controller
+    public class PageAdminController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
-
         
     }
 }

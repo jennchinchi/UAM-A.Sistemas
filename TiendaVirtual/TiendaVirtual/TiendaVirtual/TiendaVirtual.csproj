@@ -197,9 +197,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\tb_estado1Controller.cs" />
-    <Compile Include="Controllers\tb_productoController.cs" />
-    <Compile Include="Controllers\tb_tipo_usuarioController.cs" />
+    <Compile Include="Controllers\PageAdminController.cs" />
     <Compile Include="WebForms\carrito_compras.aspx.cs">
       <DependentUpon>carrito_compras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,11 +206,8 @@
       <DependentUpon>carrito_compras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\tb_categoriaController.cs" />
-    <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="FrmMasterPage.Master.cs">
       <DependentUpon>FrmMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -408,33 +403,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\tb_persona\Create.cshtml" />
-    <Content Include="Views\tb_persona\Delete.cshtml" />
-    <Content Include="Views\tb_persona\Details.cshtml" />
-    <Content Include="Views\tb_persona\Edit.cshtml" />
-    <Content Include="Views\tb_persona\Index.cshtml" />
-    <Content Include="Views\tb_categoria\Create.cshtml" />
-    <Content Include="Views\tb_categoria\Delete.cshtml" />
-    <Content Include="Views\tb_categoria\Details.cshtml" />
-    <Content Include="Views\tb_categoria\Edit.cshtml" />
-    <Content Include="Views\tb_categoria\Index.cshtml" />
-    <Content Include="Views\HomeAdmin\Index.cshtml" />
     <Content Include="_MasterPage.cshtml" />
-    <Content Include="Views\tb_producto\Create.cshtml" />
-    <Content Include="Views\tb_producto\Delete.cshtml" />
-    <Content Include="Views\tb_producto\Details.cshtml" />
-    <Content Include="Views\tb_producto\Edit.cshtml" />
-    <Content Include="Views\tb_producto\Index.cshtml" />
-    <Content Include="Views\tb_tipo_usuario\Create.cshtml" />
-    <Content Include="Views\tb_tipo_usuario\Delete.cshtml" />
-    <Content Include="Views\tb_tipo_usuario\Details.cshtml" />
-    <Content Include="Views\tb_tipo_usuario\Edit.cshtml" />
-    <Content Include="Views\tb_tipo_usuario\Index.cshtml" />
-    <Content Include="Views\tb_estado1\Create.cshtml" />
-    <Content Include="Views\tb_estado1\Delete.cshtml" />
-    <Content Include="Views\tb_estado1\Details.cshtml" />
-    <Content Include="Views\tb_estado1\Edit.cshtml" />
-    <Content Include="Views\tb_estado1\Index.cshtml" />
+    <Content Include="Views\PageAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
