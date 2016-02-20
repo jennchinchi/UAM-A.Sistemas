@@ -198,6 +198,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\PageAdminController.cs" />
+    <Compile Include="Controllers\tb_asociadoController.cs" />
+    <Compile Include="Controllers\tb_categoriaController.cs" />
+    <Compile Include="Controllers\tb_personaController.cs" />
+    <Compile Include="Controllers\tb_productoController.cs" />
     <Compile Include="WebForms\carrito_compras.aspx.cs">
       <DependentUpon>carrito_compras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -405,6 +409,26 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="_MasterPage.cshtml" />
     <Content Include="Views\PageAdmin\Index.cshtml" />
+    <Content Include="Views\tb_producto\Create.cshtml" />
+    <Content Include="Views\tb_producto\Delete.cshtml" />
+    <Content Include="Views\tb_producto\Details.cshtml" />
+    <Content Include="Views\tb_producto\Edit.cshtml" />
+    <Content Include="Views\tb_producto\Index.cshtml" />
+    <Content Include="Views\tb_categoria\Create.cshtml" />
+    <Content Include="Views\tb_categoria\Delete.cshtml" />
+    <Content Include="Views\tb_categoria\Details.cshtml" />
+    <Content Include="Views\tb_categoria\Edit.cshtml" />
+    <Content Include="Views\tb_categoria\Index.cshtml" />
+    <Content Include="Views\tb_asociado\Create.cshtml" />
+    <Content Include="Views\tb_asociado\Delete.cshtml" />
+    <Content Include="Views\tb_asociado\Details.cshtml" />
+    <Content Include="Views\tb_asociado\Edit.cshtml" />
+    <Content Include="Views\tb_asociado\Index.cshtml" />
+    <Content Include="Views\tb_persona\Create.cshtml" />
+    <Content Include="Views\tb_persona\Delete.cshtml" />
+    <Content Include="Views\tb_persona\Details.cshtml" />
+    <Content Include="Views\tb_persona\Edit.cshtml" />
+    <Content Include="Views\tb_persona\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

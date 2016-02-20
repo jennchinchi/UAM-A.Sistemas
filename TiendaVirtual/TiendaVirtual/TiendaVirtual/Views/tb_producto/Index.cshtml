@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_producto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/_MasterPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_prod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_prod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imagen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tb_categoria.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tb_estado.descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_prod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_prod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imagen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_categoria.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_estado.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_producto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_producto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_producto })
+        </td>
+    </tr>
+}
+
+</table>
