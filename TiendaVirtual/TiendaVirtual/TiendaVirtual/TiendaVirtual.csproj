@@ -202,12 +202,12 @@
     <Compile Include="Controllers\tb_categoriaController.cs" />
     <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="Controllers\tb_productoController.cs" />
-    <Compile Include="WebForms\carrito_compras.aspx.cs">
-      <DependentUpon>carrito_compras.aspx</DependentUpon>
+    <Compile Include="WebForms\wfrmCarritoCompras.aspx.cs">
+      <DependentUpon>wfrmCarritoCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForms\carrito_compras.aspx.designer.cs">
-      <DependentUpon>carrito_compras.aspx</DependentUpon>
+    <Compile Include="WebForms\wfrmCarritoCompras.aspx.designer.cs">
+      <DependentUpon>wfrmCarritoCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -278,9 +278,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebForms\wfrmInicioSesion.aspx.cs">
+      <DependentUpon>wfrmInicioSesion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\wfrmInicioSesion.aspx.designer.cs">
+      <DependentUpon>wfrmInicioSesion.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WebForms\carrito_compras.aspx" />
+    <Content Include="WebForms\wfrmCarritoCompras.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\easy-responsive-tabs.css" />
@@ -407,6 +414,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="WebForms\wfrmInicioSesion.aspx" />
     <Content Include="_MasterPage.cshtml" />
     <Content Include="Views\PageAdmin\Index.cshtml" />
     <Content Include="Views\tb_producto\Create.cshtml" />
