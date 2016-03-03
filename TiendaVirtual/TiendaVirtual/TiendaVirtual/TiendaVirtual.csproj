@@ -203,37 +203,9 @@
     <Compile Include="Controllers\tb_categoriaController.cs" />
     <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="Controllers\tb_productoController.cs" />
-    <Compile Include="MasterPageClinte.Master.cs">
-      <DependentUpon>MasterPageClinte.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPageClinte.Master.designer.cs">
-      <DependentUpon>MasterPageClinte.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site1.Master.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site1.Master.designer.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
-    </Compile>
-    <Compile Include="WebForms\carrito_compras.aspx.cs">
-      <DependentUpon>carrito_compras.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForms\carrito_compras.aspx.designer.cs">
-      <DependentUpon>carrito_compras.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="FrmMasterPage.Master.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmMasterPage.Master.designer.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,7 +290,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="WebForms\carrito_compras.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -380,8 +351,6 @@
     <Content Include="Models\ModelTiendaVirtual.edmx.diagram">
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
     </Content>
-    <Content Include="FrmMasterPage.Master" />
-    <Content Include="MasterPageClinte.Master" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -441,7 +410,6 @@
     <Content Include="Views\tb_persona\Details.cshtml" />
     <Content Include="Views\tb_persona\Edit.cshtml" />
     <Content Include="Views\tb_persona\Index.cshtml" />
-    <Content Include="Site1.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
