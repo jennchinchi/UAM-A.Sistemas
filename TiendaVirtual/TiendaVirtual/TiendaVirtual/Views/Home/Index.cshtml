@@ -7,7 +7,23 @@
 
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Ingresar como Invitado &raquo;</a></p>
 
-    <p><a href="http://localhost:1758/Account/Login" class="btn btn-primary btn-lg">Ingresar como Asociado &raquo;</a></p>
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            <p><a href="http://localhost:1758/Account/Login" class="btn btn-primary btn-lg">Ingresar como Asociado &raquo;</a></p>
+        </div>
+
+    }
+
+    @*@if ()
+    {
+        <div>
+            <p><a href="http://localhost:1758/Account/Login" class="btn btn-primary btn-lg">Ingresar como Asociado &raquo;</a></p>
+        </div>
+
+    }*@
+
+    
 
 </div>
 
