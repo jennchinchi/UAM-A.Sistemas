@@ -16,11 +16,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"  @Html.ActionLink("Inicio", "Index", "Home")            
-                <img style="height: 40px;"
-                     src="~/images/logo.png"  />
             
-
+            <a class="navbar-brand"            
+               @Html.ActionLink(" ", "Index", "Home")  
+                   <img style="height: 40px;"
+                     src="~/images/logo.png"  />
             </a>
         </div>
         <div class="navbar-collapse collapse navbar-inverse-collapse">
@@ -88,9 +88,11 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Desarrollado por InfoSoluciones</p>
         </footer>
+
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
