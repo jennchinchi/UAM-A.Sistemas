@@ -12,14 +12,12 @@ namespace TiendaVirtual.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_direccion
+    public partial class AspNetUserLogins
     {
-        public int id_direccion { get; set; }
-        public int id_provincia { get; set; }
-        public string direccion_entrega { get; set; }
-        public string id_usuario { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string UserId { get; set; }
     
-        public virtual tb_provincia tb_provincia { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

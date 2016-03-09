@@ -12,14 +12,11 @@ namespace TiendaVirtual.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_direccion
+    public partial class C__MigrationHistory
     {
-        public int id_direccion { get; set; }
-        public int id_provincia { get; set; }
-        public string direccion_entrega { get; set; }
-        public string id_usuario { get; set; }
-    
-        public virtual tb_provincia tb_provincia { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
