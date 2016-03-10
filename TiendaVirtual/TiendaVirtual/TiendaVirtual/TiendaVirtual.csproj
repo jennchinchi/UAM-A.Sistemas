@@ -283,9 +283,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="css\easy-responsive-tabs.css" />
-    <Content Include="css\etalage.css" />
-    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -327,14 +324,6 @@
     <Content Include="images\tag.png" />
     <Content Include="images\wishlist.png" />
     <Content Include="images\zoom.png" />
-    <Content Include="js\easing.js" />
-    <Content Include="js\easyResponsiveTabs.js" />
-    <Content Include="js\jquery-1.9.0.min.js" />
-    <Content Include="js\jquery.etalage.min.js" />
-    <Content Include="js\jquery.openCarousel.js" />
-    <Content Include="js\move-top.js" />
-    <Content Include="js\navigation.js" />
-    <Content Include="js\star-rating.js" />
     <Content Include="Models\ModelTiendaVirtual.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
