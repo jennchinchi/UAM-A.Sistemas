@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TiendaVirtual.Models;
 
+
 namespace TiendaVirtual.Controllers
 {
     [Authorize]

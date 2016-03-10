@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TiendaVirtual.Models;
 
+
 namespace TiendaVirtual
 {
     public class EmailService : IIdentityMessageService
