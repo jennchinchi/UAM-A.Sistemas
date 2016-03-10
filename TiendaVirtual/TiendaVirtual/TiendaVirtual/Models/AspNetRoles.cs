@@ -12,18 +12,18 @@ namespace TiendaVirtual.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_tipo_usuario
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_tipo_usuario()
+        public AspNetRoles()
         {
-            this.tb_acceso_aplicacion = new HashSet<tb_acceso_aplicacion>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int id_tipo_usuario { get; set; }
-        public string descripcion { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_acceso_aplicacion> tb_acceso_aplicacion { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

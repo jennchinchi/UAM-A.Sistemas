@@ -4,16 +4,67 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bd_tienda_virtual_dellModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tb_acceso_aplicacion">
+    <Schema Namespace="bd_tienda_virtual_dellModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
           <Key>
-            <PropertyRef Name="correo_usuario" />
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="correo_usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_tipo_usuario" Type="int" Nullable="false" />
-          <Property Name="id_estado" Type="int" Nullable="false" />
-          <Property Name="numero_intentos" Type="int" />
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_asociado">
           <Key>
@@ -22,7 +73,7 @@
           <Property Name="id_asociado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_persona" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="monto_ahorro" Type="money" Nullable="false" />
-          <Property Name="id_acceso" Type="nvarchar" MaxLength="100" />
+          <Property Name="correo_electronico" Type="nvarchar" MaxLength="100" />
           <Property Name="id_estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_carrito">
@@ -59,7 +110,7 @@
           <Property Name="id_direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_provincia" Type="int" Nullable="false" />
           <Property Name="direccion_entrega" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="id_usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_estado">
           <Key>
@@ -77,6 +128,7 @@
           <Property Name="id_direccion" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="costo_total" Type="money" Nullable="false" />
+          <Property Name="fecha" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -100,7 +152,7 @@
           <Property Name="descripcion_prod" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="id_categoria_prod" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
-          <Property Name="imagen" Type="image" />
+          <Property Name="imagen" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -109,34 +161,59 @@
           <Property Name="id_provincia" Type="int" Nullable="false" />
           <Property Name="nombre_provincia" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="tb_tipo_usuario">
-          <Key>
-            <PropertyRef Name="id_tipo_usuario" />
-          </Key>
-          <Property Name="id_tipo_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="fk_tb_acceso_aplicacion_estado">
-          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="*" />
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_estado">
-              <PropertyRef Name="id_estado" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tb_acceso_aplicacion">
-              <PropertyRef Name="id_estado" />
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_acceso_aplicacion_usuario">
-          <End Role="tb_tipo_usuario" Type="Self.tb_tipo_usuario" Multiplicity="1" />
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="*" />
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_tipo_usuario">
-              <PropertyRef Name="id_tipo_usuario" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tb_acceso_aplicacion">
-              <PropertyRef Name="id_tipo_usuario" />
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -161,18 +238,6 @@
             </Principal>
             <Dependent Role="tb_asociado">
               <PropertyRef Name="id_persona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_asociado_usuario">
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="0..1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_acceso_aplicacion">
-              <PropertyRef Name="correo_usuario" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_acceso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,11 +338,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_tb_usuario_acceso_aplicacion">
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="tb_direccion" Type="Self.tb_direccion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_acceso_aplicacion">
-              <PropertyRef Name="correo_usuario" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="tb_direccion">
               <PropertyRef Name="id_usuario" />
@@ -285,7 +350,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="bd_tienda_virtual_dellModelStoreContainer">
-          <EntitySet Name="tb_acceso_aplicacion" EntityType="Self.tb_acceso_aplicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_asociado" EntityType="Self.tb_asociado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" Schema="dbo" store:Type="Tables" />
@@ -296,14 +366,21 @@
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_producto" EntityType="Self.tb_producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_tipo_usuario" EntityType="Self.tb_tipo_usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_tb_acceso_aplicacion_estado" Association="Self.fk_tb_acceso_aplicacion_estado">
-            <End Role="tb_estado" EntitySet="tb_estado" />
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_acceso_aplicacion_usuario" Association="Self.fk_tb_acceso_aplicacion_usuario">
-            <End Role="tb_tipo_usuario" EntitySet="tb_tipo_usuario" />
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_asociado_estado" Association="Self.fk_tb_asociado_estado">
             <End Role="tb_estado" EntitySet="tb_estado" />
@@ -311,10 +388,6 @@
           </AssociationSet>
           <AssociationSet Name="fk_tb_asociado_persona" Association="Self.fk_tb_asociado_persona">
             <End Role="tb_persona" EntitySet="tb_persona" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_asociado_usuario" Association="Self.fk_tb_asociado_usuario">
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
             <End Role="tb_asociado" EntitySet="tb_asociado" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_carrito_estado" Association="Self.fk_tb_carrito_estado">
@@ -350,29 +423,14 @@
             <End Role="tb_producto" EntitySet="tb_producto" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_usuario_acceso_aplicacion" Association="Self.fk_tb_usuario_acceso_aplicacion">
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="tb_direccion" EntitySet="tb_direccion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bd_tienda_virtual_dellModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tb_acceso_aplicacion">
-          <Key>
-            <PropertyRef Name="correo_usuario" />
-          </Key>
-          <Property Name="correo_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_tipo_usuario" Type="Int32" Nullable="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="numero_intentos" Type="Int32" />
-          <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_acceso_aplicacion_estado" FromRole="tb_acceso_aplicacion" ToRole="tb_estado" />
-          <NavigationProperty Name="tb_tipo_usuario" Relationship="Self.fk_tb_acceso_aplicacion_usuario" FromRole="tb_acceso_aplicacion" ToRole="tb_tipo_usuario" />
-          <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_usuario" FromRole="tb_acceso_aplicacion" ToRole="tb_asociado" />
-          <NavigationProperty Name="tb_direccion" Relationship="Self.fk_tb_usuario_acceso_aplicacion" FromRole="tb_acceso_aplicacion" ToRole="tb_direccion" />
-        </EntityType>
         <EntityType Name="tb_asociado">
           <Key>
             <PropertyRef Name="id_asociado" />
@@ -380,13 +438,12 @@
           <Property Name="id_asociado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_persona" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="monto_ahorro" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="id_acceso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_acceso_aplicacion" Relationship="Self.fk_tb_asociado_usuario" FromRole="tb_asociado" ToRole="tb_acceso_aplicacion" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_asociado" ToRole="tb_estado" />
           <NavigationProperty Name="tb_persona" Relationship="Self.fk_tb_asociado_persona" FromRole="tb_asociado" ToRole="tb_persona" />
           <NavigationProperty Name="tb_carrito" Relationship="Self.fk_tb_carrito_tb_asociado" FromRole="tb_asociado" ToRole="tb_carrito" />
           <NavigationProperty Name="tb_factura" Relationship="Self.fk_tb_factura_asociado" FromRole="tb_asociado" ToRole="tb_factura" />
+          <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_carrito">
           <Key>
@@ -427,9 +484,9 @@
           <Property Name="id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_provincia" Type="Int32" Nullable="false" />
           <Property Name="direccion_entrega" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tb_acceso_aplicacion" Relationship="Self.fk_tb_usuario_acceso_aplicacion" FromRole="tb_direccion" ToRole="tb_acceso_aplicacion" />
+          <Property Name="id_usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tb_provincia" Relationship="Self.fk_tb_direccion_provincia" FromRole="tb_direccion" ToRole="tb_provincia" />
+          <NavigationProperty Name="AspNetUsers" Relationship="bd_tienda_virtual_dellModel.fk_tb_usuario_acceso_aplicacion1" FromRole="tb_direccion" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="tb_estado">
           <Key>
@@ -437,7 +494,6 @@
           </Key>
           <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_acceso_aplicacion" Relationship="Self.fk_tb_acceso_aplicacion_estado" FromRole="tb_estado" ToRole="tb_acceso_aplicacion" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_estado" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_carrito" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_estado" ToRole="tb_carrito" />
           <NavigationProperty Name="tb_producto" Relationship="Self.fk_tb_producto_estado" FromRole="tb_estado" ToRole="tb_producto" />
@@ -453,6 +509,7 @@
           <Property Name="costo_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_factura_asociado" FromRole="tb_factura" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_detalle" Relationship="Self.fk_tb_detalle_factura" FromRole="tb_factura" ToRole="tb_detalle" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -490,62 +547,6 @@
           <Property Name="nombre_provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tb_direccion" Relationship="Self.fk_tb_direccion_provincia" FromRole="tb_provincia" ToRole="tb_direccion" />
         </EntityType>
-        <EntityType Name="tb_tipo_usuario">
-          <Key>
-            <PropertyRef Name="id_tipo_usuario" />
-          </Key>
-          <Property Name="id_tipo_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tb_acceso_aplicacion" Relationship="Self.fk_tb_acceso_aplicacion_usuario" FromRole="tb_tipo_usuario" ToRole="tb_acceso_aplicacion" />
-        </EntityType>
-        <Association Name="fk_tb_acceso_aplicacion_estado">
-          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="tb_acceso_aplicacion">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_acceso_aplicacion_usuario">
-          <End Role="tb_tipo_usuario" Type="Self.tb_tipo_usuario" Multiplicity="1" />
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_tipo_usuario">
-              <PropertyRef Name="id_tipo_usuario" />
-            </Principal>
-            <Dependent Role="tb_acceso_aplicacion">
-              <PropertyRef Name="id_tipo_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_asociado_usuario">
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="0..1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_acceso_aplicacion">
-              <PropertyRef Name="correo_usuario" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_acceso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_usuario_acceso_aplicacion">
-          <End Role="tb_acceso_aplicacion" Type="Self.tb_acceso_aplicacion" Multiplicity="1" />
-          <End Role="tb_direccion" Type="Self.tb_direccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_acceso_aplicacion">
-              <PropertyRef Name="correo_usuario" />
-            </Principal>
-            <Dependent Role="tb_direccion">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_tb_asociado_estado">
           <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
           <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
@@ -667,7 +668,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="bd_tienda_virtual_dellEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_acceso_aplicacion" EntityType="Self.tb_acceso_aplicacion" />
           <EntitySet Name="tb_asociado" EntityType="Self.tb_asociado" />
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
@@ -678,23 +678,6 @@
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" />
           <EntitySet Name="tb_producto" EntityType="Self.tb_producto" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" />
-          <EntitySet Name="tb_tipo_usuario" EntityType="Self.tb_tipo_usuario" />
-          <AssociationSet Name="fk_tb_acceso_aplicacion_estado" Association="Self.fk_tb_acceso_aplicacion_estado">
-            <End Role="tb_estado" EntitySet="tb_estado" />
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_acceso_aplicacion_usuario" Association="Self.fk_tb_acceso_aplicacion_usuario">
-            <End Role="tb_tipo_usuario" EntitySet="tb_tipo_usuario" />
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_asociado_usuario" Association="Self.fk_tb_asociado_usuario">
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_usuario_acceso_aplicacion" Association="Self.fk_tb_usuario_acceso_aplicacion">
-            <End Role="tb_acceso_aplicacion" EntitySet="tb_acceso_aplicacion" />
-            <End Role="tb_direccion" EntitySet="tb_direccion" />
-          </AssociationSet>
           <AssociationSet Name="fk_tb_asociado_estado" Association="Self.fk_tb_asociado_estado">
             <End Role="tb_estado" EntitySet="tb_estado" />
             <End Role="tb_asociado" EntitySet="tb_asociado" />
@@ -735,31 +718,145 @@
             <End Role="tb_estado" EntitySet="tb_estado" />
             <End Role="tb_producto" EntitySet="tb_producto" />
           </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="bd_tienda_virtual_dellModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="bd_tienda_virtual_dellModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="bd_tienda_virtual_dellModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="bd_tienda_virtual_dellModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="bd_tienda_virtual_dellModel.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_usuario_acceso_aplicacion1" Association="bd_tienda_virtual_dellModel.fk_tb_usuario_acceso_aplicacion1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="tb_direccion" EntitySet="tb_direccion" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="bd_tienda_virtual_dellModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="bd_tienda_virtual_dellModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="bd_tienda_virtual_dellModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="tb_direccion" Relationship="bd_tienda_virtual_dellModel.fk_tb_usuario_acceso_aplicacion1" FromRole="AspNetUsers" ToRole="tb_direccion" />
+          <NavigationProperty Name="AspNetRoles" Relationship="bd_tienda_virtual_dellModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="bd_tienda_virtual_dellModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="bd_tienda_virtual_dellModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="bd_tienda_virtual_dellModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="bd_tienda_virtual_dellModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_usuario_acceso_aplicacion1">
+          <End Type="bd_tienda_virtual_dellModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_direccion" Role="tb_direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_direccion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="bd_tienda_virtual_dellModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="bd_tienda_virtual_dellModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="bd_tienda_virtual_dellModelStoreContainer" CdmEntityContainer="bd_tienda_virtual_dellEntities">
-          <EntitySetMapping Name="tb_acceso_aplicacion">
-            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_acceso_aplicacion">
-              <MappingFragment StoreEntitySet="tb_acceso_aplicacion">
-                <ScalarProperty Name="correo_usuario" ColumnName="correo_usuario" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="id_tipo_usuario" ColumnName="id_tipo_usuario" />
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-                <ScalarProperty Name="numero_intentos" ColumnName="numero_intentos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_asociado">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_asociado">
               <MappingFragment StoreEntitySet="tb_asociado">
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
                 <ScalarProperty Name="id_asociado" ColumnName="id_asociado" />
                 <ScalarProperty Name="id_persona" ColumnName="id_persona" />
                 <ScalarProperty Name="monto_ahorro" ColumnName="monto_ahorro" />
-                <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -815,6 +912,7 @@
           <EntitySetMapping Name="tb_factura">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_factura">
               <MappingFragment StoreEntitySet="tb_factura">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_factura" ColumnName="id_factura" />
                 <ScalarProperty Name="cliente_asociado" ColumnName="cliente_asociado" />
                 <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
@@ -857,14 +955,69 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_tipo_usuario">
-            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_tipo_usuario">
-              <MappingFragment StoreEntitySet="tb_tipo_usuario">
-                <ScalarProperty Name="id_tipo_usuario" ColumnName="id_tipo_usuario" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="bd_tienda_virtual_dellModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
