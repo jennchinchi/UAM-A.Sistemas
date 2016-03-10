@@ -1,0 +1,50 @@
+﻿@model TiendaVirtual.Models.tb_carrito
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_carrito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_producto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_producto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_asociado.id_persona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_asociado.id_persona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_estado.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_estado.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_carrito }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

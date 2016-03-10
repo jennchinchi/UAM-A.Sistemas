@@ -2,23 +2,24 @@
     ViewBag.Title = "Pagina de Administrador";
 }
 
+<h3>Pagina de Administracion</h3>
 <div class="jumbotron">
-    <h1>Pagina de Administracion</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Opciones Usuarios</h4>
+            <p><a href="http://localhost:1758/AspNetUsers/Index" class="btn btn-primary btn-block">Usuarios &raquo;</a></p>
+            <p><a href="http://localhost:1758/AspNetUsers/Index" class="btn btn-primary btn-block">Roles &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h4>Opciones Asociados y personas</h4>
+            <p><a href="http://localhost:1758/tb_asociado/Index" class="btn btn-primary btn-block">Asociados &raquo;</a></p>
+            <p><a href="http://localhost:1758/tb_persona/Index" class="btn btn-primary btn-block">Personas &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h4>Opciones Productos</h4>
+            <p><a href="http://localhost:1758/tb_asociado/Index" class="btn btn-primary btn-block">Producto &raquo;</a></p>
+            <p><a href="http://localhost:1758/tb_categoria/Index" class="btn btn-primary btn-block">Categoria &raquo;</a></p>
+        </div>
+    </div>    
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Usuarios del Sistema</h2>
-        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Usuarios &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Listado de Personas y Asociados</h2>
-        <p><a href="http://localhost:1758/tb_asociado/Index" class="btn btn-primary btn-lg">Asociados &raquo;</a></p>
-        <p><a href="http://localhost:1758/tb_persona/Index" class="btn btn-primary btn-lg">Personas &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Productos en Venta</h2>
-        <p><a href=~/Controllers/tb_productoController.cs class="btn btn-primary btn-lg">Producto &raquo;</a></p>
-        <p><a href=~/Controllers/tb_productoCategorias.cs class="btn btn-primary btn-lg">Ventas &raquo;</a></p>
-    </div>
-</div>
