@@ -25,7 +25,6 @@ namespace TiendaVirtual.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_acceso_aplicacion> tb_acceso_aplicacion { get; set; }
         public virtual DbSet<tb_asociado> tb_asociado { get; set; }
         public virtual DbSet<tb_carrito> tb_carrito { get; set; }
         public virtual DbSet<tb_categoria> tb_categoria { get; set; }
@@ -36,6 +35,10 @@ namespace TiendaVirtual.Models
         public virtual DbSet<tb_persona> tb_persona { get; set; }
         public virtual DbSet<tb_producto> tb_producto { get; set; }
         public virtual DbSet<tb_provincia> tb_provincia { get; set; }
-        public virtual DbSet<tb_tipo_usuario> tb_tipo_usuario { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

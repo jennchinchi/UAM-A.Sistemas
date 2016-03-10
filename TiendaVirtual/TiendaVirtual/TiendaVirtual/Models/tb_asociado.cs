@@ -24,10 +24,9 @@ namespace TiendaVirtual.Models
         public int id_asociado { get; set; }
         public string id_persona { get; set; }
         public decimal monto_ahorro { get; set; }
-        public string id_acceso { get; set; }
         public int id_estado { get; set; }
+        public string correo_electronico { get; set; }
     
-        public virtual tb_acceso_aplicacion tb_acceso_aplicacion { get; set; }
         public virtual tb_estado tb_estado { get; set; }
         public virtual tb_persona tb_persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

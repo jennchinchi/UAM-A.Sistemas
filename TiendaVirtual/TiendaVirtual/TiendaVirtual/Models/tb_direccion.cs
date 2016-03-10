@@ -19,7 +19,7 @@ namespace TiendaVirtual.Models
         public string direccion_entrega { get; set; }
         public string id_usuario { get; set; }
     
-        public virtual tb_acceso_aplicacion tb_acceso_aplicacion { get; set; }
         public virtual tb_provincia tb_provincia { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

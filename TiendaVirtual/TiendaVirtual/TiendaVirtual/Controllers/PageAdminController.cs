@@ -8,6 +8,7 @@ namespace TiendaVirtual.Controllers
 {
     public class PageAdminController : Controller
     {
+        //[Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
             return View();

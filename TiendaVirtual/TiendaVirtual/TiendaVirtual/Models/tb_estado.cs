@@ -17,7 +17,6 @@ namespace TiendaVirtual.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_estado()
         {
-            this.tb_acceso_aplicacion = new HashSet<tb_acceso_aplicacion>();
             this.tb_asociado = new HashSet<tb_asociado>();
             this.tb_carrito = new HashSet<tb_carrito>();
             this.tb_producto = new HashSet<tb_producto>();
@@ -26,8 +25,6 @@ namespace TiendaVirtual.Models
         public int id_estado { get; set; }
         public string descripcion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_acceso_aplicacion> tb_acceso_aplicacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_asociado> tb_asociado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
