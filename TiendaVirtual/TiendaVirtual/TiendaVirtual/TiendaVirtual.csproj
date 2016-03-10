@@ -203,13 +203,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="FrmMasterPage.Master.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmMasterPage.Master.designer.cs">
-      <DependentUpon>FrmMasterPage.Master</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,9 +277,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="css\easy-responsive-tabs.css" />
-    <Content Include="css\etalage.css" />
-    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -328,14 +318,6 @@
     <Content Include="images\tag.png" />
     <Content Include="images\wishlist.png" />
     <Content Include="images\zoom.png" />
-    <Content Include="js\easing.js" />
-    <Content Include="js\easyResponsiveTabs.js" />
-    <Content Include="js\jquery-1.9.0.min.js" />
-    <Content Include="js\jquery.etalage.min.js" />
-    <Content Include="js\jquery.openCarousel.js" />
-    <Content Include="js\move-top.js" />
-    <Content Include="js\navigation.js" />
-    <Content Include="js\star-rating.js" />
     <Content Include="Models\ModelTiendaVirtual.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
@@ -360,7 +342,6 @@
     <Content Include="Models\ModelTiendaVirtual.edmx.diagram">
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
     </Content>
-    <Content Include="FrmMasterPage.Master" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -420,7 +401,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="_MasterPage.cshtml" />
     <Content Include="Views\PageAdmin\Index.cshtml" />
     <Content Include="Views\AspNetUsers\Create.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
@@ -431,7 +411,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
