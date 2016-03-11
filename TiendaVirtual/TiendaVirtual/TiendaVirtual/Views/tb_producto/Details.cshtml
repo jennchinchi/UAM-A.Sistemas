@@ -1,7 +1,7 @@
 ﻿@model TiendaVirtual.Models.tb_producto
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de Producto";
 }
 
 <h2>Details</h2>
@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_producto }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_producto }) |
+    @Html.ActionLink("Ir atras <-", "Index")
 </p>
