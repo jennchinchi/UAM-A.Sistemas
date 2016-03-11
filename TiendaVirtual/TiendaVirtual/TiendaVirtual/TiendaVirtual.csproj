@@ -421,8 +421,6 @@
     <Content Include="Views\tb_categoria\Edit.cshtml" />
     <Content Include="Views\tb_categoria\Index.cshtml" />
     <Content Include="Views\tb_persona\Create.cshtml" />
-    <Content Include="Views\tb_persona\Delete.cshtml" />
-    <Content Include="Views\tb_persona\Details.cshtml" />
     <Content Include="Views\tb_persona\Edit.cshtml" />
     <Content Include="Views\tb_persona\Index.cshtml" />
     <Content Include="Views\tb_producto\Create.cshtml" />
