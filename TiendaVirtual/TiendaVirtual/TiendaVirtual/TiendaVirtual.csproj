@@ -414,7 +414,6 @@
     <Content Include="Views\AspNetRoles\Index.cshtml" />
     <Content Include="Views\tb_asociado\Create.cshtml" />
     <Content Include="Views\tb_asociado\Delete.cshtml" />
-    <Content Include="Views\tb_asociado\Details.cshtml" />
     <Content Include="Views\tb_asociado\Edit.cshtml" />
     <Content Include="Views\tb_asociado\Index.cshtml" />
     <Content Include="Views\tb_categoria\Create.cshtml" />
