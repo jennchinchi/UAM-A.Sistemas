@@ -15,12 +15,21 @@ namespace TiendaVirtual.Controllers
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
         // GET: tb_producto
-        public ActionResult Index()
+        public ActionResult Index(string busqueda)
         {
-            var tb_producto = db.tb_producto.Include(t => t.tb_categoria).Include(t => t.tb_estado);
-            return View(tb_producto.ToList());
+            if (String.IsNullOrEmpty(busqueda))
+            {
+                var tb_producto = db.tb_producto.Include(t => t.tb_categoria).Include(t => t.tb_estado);
+                return View(tb_producto.ToList());
+            }
+            else
+            {
+                var tb_producto = db.tb_producto.Include(t => t.tb_categoria).Include(t => t.tb_estado).Where(t => t.tb_categoria.descripcion == busqueda);
+                return View(tb_producto.ToList());
+            }
+            
         }
-
+                
         // GET: tb_producto/Details/5
         public ActionResult Details(int? id)
         {
