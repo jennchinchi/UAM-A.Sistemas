@@ -9,11 +9,16 @@ namespace TiendaVirtual.Models
 {
     public partial class ShoppingCart
     {
+        /*Variable para llamar la base de datos */
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
+        /*Variable para el ID del Carrito */
         string ShoppingCartId { get; set; }
+
+        /* Constante de Actividad de secion */
         public const string CartSessionKey = "CartId";
 
+        /* Para mantener el carrito en uso */
         public static ShoppingCart GetCart(HttpContextBase context)
         {
             var cart = new ShoppingCart();
@@ -21,12 +26,13 @@ namespace TiendaVirtual.Models
             return cart;
         }
 
-        // Helper method to simplify shopping cart calls
+        // Llamado a los metodos del Shopping Cart
         public static ShoppingCart GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }
 
+        // Añadir item al carrito de la persona
         public int AddToCart(tb_producto item,int id_persona)
         {
             // Get the matching cart and item instances
@@ -36,10 +42,9 @@ namespace TiendaVirtual.Models
 
             if (cartItem == null)
             {
-                // Create a new cart item if no cart item exists
+                // Si no existe un item se crea
                 cartItem = new tb_carrito
                 {
-
                     id_producto = item.id_producto,
                     id_carrito = Convert.ToInt32(ShoppingCartId),
                     cantidad = 1,
@@ -50,83 +55,84 @@ namespace TiendaVirtual.Models
             }
             else
             {
-                // If the item does exist in the cart, 
-                // then add one to the quantity
+                // Si el item existe en el carrito aumentar la cantidad
                 cartItem.cantidad++;
             }
-            // Save changes
+            // Guardar Cambios
             db.SaveChanges();
 
             return cartItem.cantidad;
         }
 
-        public int RemoveFromCart(int id)
+        // Remover del carro
+        public int RemoveFromCart(int id_producto_remover)
         {
+            // Conseguir id del caarrito
 
-
-            // Get the cart
-
-            var cartItem = storeDB.Carts.Single(
-                cart => cart.CartId == ShoppingCartId
-                && cart.ItemId == id);
-
+            var cartItem = db.tb_carrito.Single(
+                cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId)
+                && cart.id_producto == id_producto_remover);
 
             int itemCount = 0;
 
             if (cartItem != null)
             {
-                if (cartItem.Count > 1)
+                if (cartItem.cantidad > 1)
                 {
-                    cartItem.Count--;
-                    itemCount = cartItem.Count;
+                    cartItem.cantidad--;
+                    itemCount = cartItem.cantidad;
                 }
                 else
                 {
-                    storeDB.Carts.Remove(cartItem);
+                    db.tb_carrito.Remove(cartItem);
                 }
-                // Save changes
-                storeDB.SaveChanges();
+                // Guardar Cambios
+                db.SaveChanges();
             }
             return itemCount;
         }
 
         public void EmptyCart()
         {
-            var cartItems = storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId);
+            var cartItems = db.tb_carrito.Where(
+                cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId));
 
             foreach (var cartItem in cartItems)
             {
-                storeDB.Carts.Remove(cartItem);
+                db.tb_carrito.Remove(cartItem);
             }
-            // Save changes
-            storeDB.SaveChanges();
+            // Guardar Cambios
+            db.SaveChanges();
         }
 
-        public List<Cart> GetCartItems()
+        public List<tb_carrito> GetCartItems()
         {
-            return storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId).ToList();
+            return db.tb_carrito.Where(
+                cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId)).ToList();
         }
 
         public int GetCount()
         {
             // Get the count of each item in the cart and sum them up
-            int? count = (from cartItems in storeDB.Carts
-                          where cartItems.CartId == ShoppingCartId
-                          select (int?)cartItems.Count).Sum();
+            int? count = (from cartItems in db.tb_carrito
+                          where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                          select (int?)cartItems.cantidad).Sum();
             // Return 0 if all entries are null
             return count ?? 0;
         }
+
+        /* CONTINUAR MODIFICANDO DE ACA EN ADELANTE: ATT JESUS */ 
+
+
 
         public decimal GetTotal()
         {
             // Multiply item price by count of that item to get 
             // the current price for each of those items in the cart
             // sum all item price totals to get the cart total
-            decimal? total = (from cartItems in storeDB.Carts
-                              where cartItems.CartId == ShoppingCartId
-                              select (int?)cartItems.Count *
+            decimal? total = (from cartItems in db.tb_carrito
+                              where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                              select (int?)cartItems.cantidad *
                               cartItems.Item.Price).Sum();
 
             return total ?? decimal.Zero;
@@ -198,6 +204,7 @@ namespace TiendaVirtual.Models
             {
                 item.CartId = userName;
             }
+            // Guardar Cambios
             storeDB.SaveChanges();
         }
     }
