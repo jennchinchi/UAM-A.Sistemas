@@ -205,6 +205,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\tb_asociadoController.cs" />
+    <Compile Include="Controllers\tb_carritoController.cs" />
     <Compile Include="Controllers\tb_categoriaController.cs" />
     <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="Controllers\tb_productoController.cs" />
@@ -244,6 +245,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\tb_asociado.cs">
       <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
     </Compile>
@@ -427,9 +429,15 @@
     <Content Include="Views\tb_producto\Details.cshtml" />
     <Content Include="Views\tb_producto\Edit.cshtml" />
     <Content Include="Views\tb_producto\Index.cshtml" />
+    <Content Include="Views\tb_carrito\Create.cshtml" />
+    <Content Include="Views\tb_carrito\Delete.cshtml" />
+    <Content Include="Views\tb_carrito\Details.cshtml" />
+    <Content Include="Views\tb_carrito\Edit.cshtml" />
+    <Content Include="Views\tb_carrito\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
