@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
+    <!-- Barra de Navegacion -->
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -16,30 +16,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" @Html.ActionLink("Inicio", "Index", "Home")
-                <img style="height: 40px;"
-                     src="~/images/logo.png"  />
-
-
+            <a class="navbar-brand" href="~/Home/Index">
+                <img style="height: 30px;"
+                     src="~/images/logo.png"  /><br />
             </a>
         </div>
         <div class="navbar-collapse collapse navbar-inverse-collapse">
             <ul class="nav navbar-nav">
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sitio<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-home"></span> Sitio<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>   
                         <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 </li>
-
+                <!-- Categorias -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categoria 1<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tecnologia<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Subcategoria 1</a></li>
-                        <li><a href="#">Subcategoria 1</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Celulares">Celulares</a></li>
+                        <li><a href="#">Tablets</a></li>
                         <li><a href="#">Subcategoria 1</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Subtitulo</li>
@@ -47,9 +45,9 @@
                         <li><a href="#">Subcategoria 1</a></li>
                     </ul>
                 </li>
-
+                <!-- Categorias -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categoria 2<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hogar<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Subcategoria 2</a></li>
                         <li><a href="#">Subcategoria 2</a></li>
@@ -61,7 +59,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categoria 2<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Automóvil<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Subcategoria 3</a></li>
                         <li><a href="#">Subcategoria 3</a></li>
@@ -73,80 +71,46 @@
                     </ul>
                 </li>
             </ul>
-
             <div> </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Cuenta <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                    <span class="glyphicon glyphicon-log-in"></span> Cuenta <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>@Html.Partial("_LoginPartial")</li>
+                        <li>  @Html.Partial("_LoginPartial")</li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
+    <!-- Fin Barra de Navegacion -->
+    <!-- Cuerpo de la Pagina -->
     <div class="container body-content">
         @RenderBody()
+    <!-- Fin de Cuerpo de la Pagina -->
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Diseño y Desarrollo por InfoSoluciones - @DateTime.Now.Year
+                        </div>
+                        <div class="col-lg-4">
+                            <img class="center-block" style="height: 45px;" src="~/images/InfoSoluciones_3.JPG" />
+                        </div>
+                        <div class="col-lg-4 copyright">
+                            Copyright &copy; AsoDell
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
+    <!-- Scripts Necesarios -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-
-
-
-
-
-@*<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - AsoDELL</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("AsoDell - Tienda Virtual", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - AsoDELL</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>*@

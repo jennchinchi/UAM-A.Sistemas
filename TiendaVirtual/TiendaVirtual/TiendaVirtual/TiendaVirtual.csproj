@@ -198,11 +198,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AspNetRolesController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\PageAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\tb_asociadoController.cs" />
+    <Compile Include="Controllers\tb_carritoController.cs" />
+    <Compile Include="Controllers\tb_categoriaController.cs" />
+    <Compile Include="Controllers\tb_personaController.cs" />
+    <Compile Include="Controllers\tb_productoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,6 +245,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\tb_asociado.cs">
       <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
     </Compile>
@@ -287,6 +294,7 @@
     <Content Include="images\compare.png" />
     <Content Include="images\computer.png" />
     <Content Include="images\drop_arrow.png" />
+    <Content Include="images\InfoSoluciones_3.JPG" />
     <Content Include="images\latest-product-img1.jpg" />
     <Content Include="images\latest-product-img2.jpg" />
     <Content Include="images\latest-product-img3.jpg" />
@@ -402,12 +410,34 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\PageAdmin\Index.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\AspNetRoles\Create.cshtml" />
+    <Content Include="Views\AspNetRoles\Edit.cshtml" />
+    <Content Include="Views\AspNetRoles\Index.cshtml" />
+    <Content Include="Views\tb_asociado\Create.cshtml" />
+    <Content Include="Views\tb_asociado\Delete.cshtml" />
+    <Content Include="Views\tb_asociado\Edit.cshtml" />
+    <Content Include="Views\tb_asociado\Index.cshtml" />
+    <Content Include="Views\tb_categoria\Create.cshtml" />
+    <Content Include="Views\tb_categoria\Edit.cshtml" />
+    <Content Include="Views\tb_categoria\Index.cshtml" />
+    <Content Include="Views\tb_persona\Create.cshtml" />
+    <Content Include="Views\tb_persona\Edit.cshtml" />
+    <Content Include="Views\tb_persona\Index.cshtml" />
+    <Content Include="Views\tb_producto\Create.cshtml" />
+    <Content Include="Views\tb_producto\Details.cshtml" />
+    <Content Include="Views\tb_producto\Edit.cshtml" />
+    <Content Include="Views\tb_producto\Index.cshtml" />
+    <Content Include="Views\tb_carrito\Create.cshtml" />
+    <Content Include="Views\tb_carrito\Delete.cshtml" />
+    <Content Include="Views\tb_carrito\Details.cshtml" />
+    <Content Include="Views\tb_carrito\Edit.cshtml" />
+    <Content Include="Views\tb_carrito\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_categoria>
+
+@{
+    ViewBag.Title = "Listado de Categorias";
+}
+<div class="jumbotron">
+    <h2>Listado de Categorias</h2>
+</div>
+    <p>
+        @Html.ActionLink("Crear un nuevo Registro", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Nombre de Categoria")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.id_categoria }) |
+                </td>
+            </tr>
+        }
+
+    </table>

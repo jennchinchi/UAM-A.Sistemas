@@ -8,110 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using TiendaVirtual.Models;
 
-
 namespace TiendaVirtual.Controllers
 {
-    public class AspNetUsersController : Controller
+    public class tb_categoriaController : Controller
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: AspNetUsers
+        // GET: tb_categoria
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.ToList());
+            return View(db.tb_categoria.ToList());
         }
 
-        // GET: AspNetUsers/Details/5
-        public ActionResult Details(string id)
+        // GET: tb_categoria/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            if (aspNetUsers == null)
+            tb_categoria tb_categoria = db.tb_categoria.Find(id);
+            if (tb_categoria == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(tb_categoria);
         }
 
-        // GET: AspNetUsers/Create
+        // GET: tb_categoria/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AspNetUsers/Create
+        // POST: tb_categoria/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers)
+        public ActionResult Create([Bind(Include = "id_categoria,descripcion")] tb_categoria tb_categoria)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUsers.Add(aspNetUsers);
+                db.tb_categoria.Add(tb_categoria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(aspNetUsers);
+            return View(tb_categoria);
         }
 
-        // GET: AspNetUsers/Edit/5
-        public ActionResult Edit(string id)
+        // GET: tb_categoria/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            if (aspNetUsers == null)
+            tb_categoria tb_categoria = db.tb_categoria.Find(id);
+            if (tb_categoria == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(tb_categoria);
         }
 
-        // POST: AspNetUsers/Edit/5
+        // POST: tb_categoria/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "id_categoria,descripcion")] tb_categoria tb_categoria)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUsers).State = EntityState.Modified;
+                db.Entry(tb_categoria).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(aspNetUsers);
+            return View(tb_categoria);
         }
 
-        // GET: AspNetUsers/Delete/5
-        public ActionResult Delete(string id)
+        // GET: tb_categoria/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            if (aspNetUsers == null)
+            tb_categoria tb_categoria = db.tb_categoria.Find(id);
+            if (tb_categoria == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(tb_categoria);
         }
 
-        // POST: AspNetUsers/Delete/5
+        // POST: tb_categoria/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUsers);
+            tb_categoria tb_categoria = db.tb_categoria.Find(id);
+            db.tb_categoria.Remove(tb_categoria);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

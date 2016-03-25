@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_asociado>
+
+@{
+    ViewBag.Title = "Listado de Asociados";
+}
+
+<div class="jumbotron">
+    <h2>Listado de Asociados</h2>
+</div>
+
+<p>
+    @Html.ActionLink("Crear un nuevo Registro", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre de la Persona")
+        </th>
+        <th>
+            @Html.DisplayName("Monto de Ahorro")
+        </th>
+        <th>
+            @Html.DisplayName("Correo Electronico")
+        </th>
+        <th>
+            @Html.DisplayName("Estado")
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_persona.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monto_ahorro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo_electronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_estado.descripcion)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_asociado }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_asociado })
+        </td>
+    </tr>
+}
+
+</table>
