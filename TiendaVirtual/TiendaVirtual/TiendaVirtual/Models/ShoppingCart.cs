@@ -158,7 +158,8 @@ namespace TiendaVirtual.Models
         //                storeDB.OrderDetails.Add(orderDetail);
 
         //            }
-        //            // Set the order's total to the orderTotal count
+
+        //           // Set the order's total to the orderTotal count
         //            order.Total = orderTotal;
 
         //            // Save the order
