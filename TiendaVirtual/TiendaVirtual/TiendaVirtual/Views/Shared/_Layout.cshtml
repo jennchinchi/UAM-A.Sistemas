@@ -32,44 +32,39 @@
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 </li>
-                <!-- Categorias -->
+                <!-- Categorias de Tecnologia con cada uno de sus elementos-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tecnologia<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="~/tb_producto/Index?busqueda=Celulares">Celulares</a></li>
-                        <li><a href="#">Tablets</a></li>
-                        <li><a href="#">Subcategoria 1</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Subtitulo</li>
-                        <li><a href="#">Subcategoria 1</a></li>
-                        <li><a href="#">Subcategoria 1</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Tablets">Tablets</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Video">Video Juegos</a></li>
                     </ul>
                 </li>
-                <!-- Categorias -->
+                <!-- Categorias de Hogar con cada uno de sus elementos-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hogar<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Subcategoria 2</a></li>
-                        <li><a href="#">Subcategoria 2</a></li>
-                        <li><a href="#">Subcategoria 2 </a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Subtitulo</li>
-                        <li><a href="#">Subcategoria 2</a></li>
-                        <li><a href="#">Subcategoria 2</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Muebles">Muebles</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Electrodomesticos">Electrodomesticos</a></li>
                     </ul>
                 </li>
+                <!-- Categorias de Automovil con cada uno de sus elementos-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Automóvil<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Subcategoria 3</a></li>
-                        <li><a href="#">Subcategoria 3</a></li>
-                        <li><a href="#">Subcategoria 3 </a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Subtitulo</li>
-                        <li><a href="#">Subcategoria 3</a></li>
-                        <li><a href="#">Subcategoria 3</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Repuestos">Repuestos</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Herramientas">Herramientas</a></li>
+                        <li><a href="~/tb_producto/Index?busqueda=Accesorios">Accesorios </a></li>
                     </ul>
                 </li>
+                <!-- Categorias de Administrador con acceso al menu principal-->
+                @if (User.IsInRole("Admin"))
+                {
+                <li class="dropdown">
+                    <a href="~/PageAdmin/" class="dropdown-toggle" data-toggle="dropdown">Menu Principal<b class="caret"></b></a>
+                </li>
+                }
             </ul>
             <div> </div>
             <ul class="nav navbar-nav navbar-right">
