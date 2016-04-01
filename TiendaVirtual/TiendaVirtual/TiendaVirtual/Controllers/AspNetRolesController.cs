@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -12,16 +10,16 @@ using TiendaVirtual.Models;
 namespace TiendaVirtual.Controllers
 {
     public class AspNetRolesController : Controller
-    {
+    {   //instancia a la base de datos
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: AspNetRoles
+        // retorna la vista con la lista de los roles
         public ActionResult Index()
         {
             return View(db.AspNetRoles.ToList());
         }
 
-        // GET: AspNetRoles/Details/5
+        // muestra un roll en especifico a fin de conocer detalles
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,25 +34,23 @@ namespace TiendaVirtual.Controllers
             return View(aspNetRoles);
         }
 
-        // GET: AspNetRoles/Create
+        // retorna la vista de creacion 
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AspNetRoles/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        // metodo de creacion de roles
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] AspNetRoles aspNetRoles)
         {
             if (ModelState.IsValid)
-            {
+            {   //creacion de un rol en base al modelo de la base de datos
                 db.AspNetRoles.Add(aspNetRoles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }   //salva y retorna al index de los roles
 
             return View(aspNetRoles);
         }
