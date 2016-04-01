@@ -4,10 +4,49 @@
     ViewBag.Title = "Detalle de Producto";
 }
 
-<h2>Details</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Se agrego un producto al carrito</strong> Para procesar orden <a href="#" class="alert-link">dé click aqui</a>.
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirmar orden.</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea procesar compra o seguir comprando?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Procesar compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+<h2>Detalle</h2>
 
 <div>
-    <h4>tb_producto</h4>
+    <h4>Producto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,6 +108,14 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.id_producto }) |
+    <a href="#" class="AddLink"
+       data-id="@Model.id_producto" data-toggle="modal" data-target="#myModal">
+        Agregar al carrito
+    </a>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id_producto})
+
+    }
     @Html.ActionLink("Ir atras <-", "Index")
 </p>

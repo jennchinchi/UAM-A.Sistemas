@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using TiendaVirtual.Models;
+﻿using TiendaVirtual.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-
-namespace TiendaVirtual.ViewModels
+namespace TiendaVirtual.ViewModel
 {
     public class ShoppingCartViewModel
     {
