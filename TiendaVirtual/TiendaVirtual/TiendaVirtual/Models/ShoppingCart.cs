@@ -121,19 +121,19 @@ namespace TiendaVirtual.Models
                     return count ?? 0;
                 }
 
-        
-        //        public decimal GetTotal()
-        //        {
-        //            // Multiply item price by count of that item to get 
-        //            // the current price for each of those items in the cart
-        //            // sum all item price totals to get the cart total
-        //            decimal? total = (from cartItems in db.tb_carrito
-        //                              where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
-        //                              select (int?)cartItems.cantidad *
-        //                              cartItems.Item.Price).Sum();
 
-        //            return total ?? decimal.Zero;
-        //        }
+        public decimal GetTotal()
+        {
+            // Multiply item price by count of that item to get 
+            // the current price for each of those items in the cart
+            // sum all item price totals to get the cart total
+            decimal? total = (from cartItems in db.tb_carrito
+                              where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                              select (int?)cartItems.cantidad *
+                              cartItems.tb_producto.costo).Sum();
+
+            return total ?? decimal.Zero;
+        }
 
         //        public Order CreateOrder(Order order)
         //        {
@@ -171,7 +171,7 @@ namespace TiendaVirtual.Models
         //        }
 
         //        // Metodo que indica quien esta activo por el ID en el carrito de compras.
-                public string GetCartId(HttpContextBase context)
+        public string GetCartId(HttpContextBase context)
                 {
                     if (context.Session[CartSessionKey] == null)
                     {

@@ -19,6 +19,8 @@ namespace TiendaVirtual.Models
         public int id_producto { get; set; }
         public int cantidad { get; set; }
         public int id_estado { get; set; }
+
+        public virtual tb_producto tb_producto {get; set;}
     
         public virtual tb_asociado tb_asociado { get; set; }
         public virtual tb_estado tb_estado { get; set; }
