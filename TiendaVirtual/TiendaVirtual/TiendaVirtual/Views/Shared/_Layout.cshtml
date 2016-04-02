@@ -84,6 +84,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="btn-link">
                     @{Html.RenderAction("Carrito", "ShoppingCart");}
+                   <li><a href="~/tb_carrito/Index?usuario=@User.Identity.Name"></a></li>
                 </li>
             </ul>
             <p>&nbsp;</p>
