@@ -27,8 +27,8 @@ namespace TiendaVirtual.Controllers
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(this.HttpContext);
-            var idUser = System.Web.Security.Membership.GetUser().ProviderUserKey;
-            int count = cart.AddToCart(addedItem, int.Parse(idUser.ToString()));
+
+            int count = cart.AddToCart(addedItem);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModel

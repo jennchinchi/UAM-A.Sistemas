@@ -85,6 +85,7 @@
           <Property Name="id_producto" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
+          <Property Name="id_carrito_user" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_categoria">
           <Key>
@@ -456,6 +457,7 @@
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_carrito_tb_asociado" FromRole="tb_carrito" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_carrito" ToRole="tb_estado" />
+          <Property Name="id_carrito_user" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_categoria">
           <Key>
@@ -864,6 +866,7 @@
           <EntitySetMapping Name="tb_carrito">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_carrito">
               <MappingFragment StoreEntitySet="tb_carrito">
+                <ScalarProperty Name="id_carrito_user" ColumnName="id_carrito_user" />
                 <ScalarProperty Name="id_carrito" ColumnName="id_carrito" />
                 <ScalarProperty Name="id_asociado" ColumnName="id_asociado" />
                 <ScalarProperty Name="id_producto" ColumnName="id_producto" />

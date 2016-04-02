@@ -33,11 +33,11 @@ namespace TiendaVirtual.Models
                 }
 
                 // Añadir item al carrito de la persona
-                public int AddToCart(tb_producto item,int id_persona)
+                public int AddToCart(tb_producto item)
                 {
                     // Get the matching cart and item instances
                     var cartItem = db.tb_carrito.SingleOrDefault(
-                        c => Convert.ToString(c.id_carrito) == ShoppingCartId
+                        c => c.id_carrito_user == ShoppingCartId
                         && c.id_producto == item.id_producto);
 
                     if (cartItem == null)
@@ -46,10 +46,10 @@ namespace TiendaVirtual.Models
                         cartItem = new tb_carrito
                         {
                             id_producto = item.id_producto,
-                            id_carrito = Convert.ToInt32(ShoppingCartId),
+                            id_carrito_user = ShoppingCartId,
                             cantidad = 1,
                             id_estado = 1,
-                            id_asociado= id_persona,
+                            id_asociado= 1,
                         };
                         db.tb_carrito.Add(cartItem);
                     }
@@ -127,12 +127,12 @@ namespace TiendaVirtual.Models
             // Multiply item price by count of that item to get 
             // the current price for each of those items in the cart
             // sum all item price totals to get the cart total
-            decimal? total = (from cartItems in db.tb_carrito
-                              where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
-                              select (int?)cartItems.cantidad *
-                              cartItems.tb_producto.costo).Sum();
+            //decimal? total = (from cartItems in db.tb_carrito
+            //                  where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+            //                  select (int?)cartItems.cantidad *
+            //                  cartItems.tb_producto.costo).Sum();
 
-            return total ?? decimal.Zero;
+            return decimal.Zero;
         }
 
         //        public Order CreateOrder(Order order)
