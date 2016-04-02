@@ -1,0 +1,135 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_producto>
+
+@{
+    ViewBag.Title = "Listado de Productos";
+}
+<div class="jumbotron">
+    <h2>Listado de Productos</h2>
+</div>
+
+<p>
+    @Html.ActionLink("Crear un nuevo Registro", "Create")
+</p>
+@*-----------------------------------------Barra de busqueda-------------------------------------------*@
+@*<div class="bs-docs-section">
+    <div class="row">
+        @using (Html.BeginForm("Index", "tb_producto", FormMethod.Get))
+        {
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Find: </span>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-info btn-sm" value="busqueda" />
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>*@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/tb_carrito/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
+
+<!-- Button trigger modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+    </div>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirm check out.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Would you like to check out or keep shopping??</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre del producto")
+        </th>
+        <th>
+            @Html.DisplayName("Costo")
+        </th>
+        <th>
+            @Html.DisplayName("Cantidad")
+        </th>
+        <th>
+            @Html.DisplayName("Descripcion")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_prod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_prod)
+        </td>
+        <td>
+            <a href="#" class="AddLink"
+               data-id="@item.id_producto" data-toggle="modal" data-target="#myModal">
+                Add
+                to cart
+            </a>
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Editar", "Edit", new { id = item.id_producto })
+            }
+            @if (User.IsInRole("cliente"))
+            {
+                @Html.ActionLink("Agregar a Carrito", "AddToCart", "ShoppingCart", new { id = item.id_producto }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })
+                @Html.ActionLink("Ver Producto", "Details", new { id = item.id_producto })
+            }
+        </td>
+
+    </tr>
+}
+
+</table>

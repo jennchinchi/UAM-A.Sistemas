@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace TiendaVirtual.Controllers
 {
     public class HomeController : Controller
@@ -15,14 +16,14 @@ namespace TiendaVirtual.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Acerca Nosotros.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contactenos.";
 
             return View();
         }

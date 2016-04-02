@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TiendaVirtual.Models.AspNetUsers>
+
+@{
+    ViewBag.Title = "Index Usuarios";
+}
+<div class="jumbotron">
+    <h3>Indice de Usuarios del Sistema</h3>
+</div>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+
+    </head>
+    <body>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Correo Electronico")
+                </th>
+                <th>
+                    @Html.DisplayName("Numero Telefonico")
+                </th>
+                <th>
+                    @Html.DisplayName("Bloqueo")
+                </th>
+                <th>
+                    @Html.DisplayName("Numero de Fallos")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessFailedCount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </body>
+</html>

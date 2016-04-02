@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TiendaVirtual.Models.AspNetRoles>
+
+@{
+    ViewBag.Title = "Indice de Roles de Usuarios";
+}
+<div class="jumbotron">
+    <h3>Listado de Roles para los Usuarios del Sistema</h3>
+</div>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+
+    </head>
+    <body>
+        <p>
+            @Html.ActionLink("Crear un nuevo Registro", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Tipos de Roles")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </body>
+</html>

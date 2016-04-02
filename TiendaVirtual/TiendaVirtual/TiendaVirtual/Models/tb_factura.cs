@@ -25,6 +25,7 @@ namespace TiendaVirtual.Models
         public int id_direccion { get; set; }
         public int id_estado { get; set; }
         public decimal costo_total { get; set; }
+        public System.DateTime fecha { get; set; }
     
         public virtual tb_asociado tb_asociado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
