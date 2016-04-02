@@ -115,7 +115,7 @@ namespace TiendaVirtual.Models
                 {
                     // Get the count of each item in the cart and sum them up
                     int? count = (from cartItems in db.tb_carrito
-                                  where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                                  where cartItems.id_carrito_user == ShoppingCartId
                                   select (int?)cartItems.cantidad).Sum();
                     // Return 0 if all entries are null
                     return count ?? 0;
@@ -127,12 +127,12 @@ namespace TiendaVirtual.Models
             // Multiply item price by count of that item to get 
             // the current price for each of those items in the cart
             // sum all item price totals to get the cart total
-            //decimal? total = (from cartItems in db.tb_carrito
-            //                  where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
-            //                  select (int?)cartItems.cantidad *
-            //                  cartItems.tb_producto.costo).Sum();
+            decimal? total = (from cartItems in db.tb_carrito
+                              where cartItems.id_carrito_user == ShoppingCartId
+                              select (int?)cartItems.cantidad *
+                              cartItems.tb_producto.costo).Sum();
 
-            return decimal.Zero;
+            return total ?? decimal.Zero;
         }
 
         //        public Order CreateOrder(Order order)

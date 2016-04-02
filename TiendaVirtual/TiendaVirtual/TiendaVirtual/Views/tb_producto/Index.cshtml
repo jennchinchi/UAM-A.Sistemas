@@ -40,7 +40,7 @@
                 // Perform the ajax post
                 $.post("/tb_carrito/AddToCart", { "id": recordToAdd },
                     function (data) {
-                        $('#cart-status').text(data.CartCount);
+                        $('.cart-count').text(data.CartCount);
                     });
             }
         });

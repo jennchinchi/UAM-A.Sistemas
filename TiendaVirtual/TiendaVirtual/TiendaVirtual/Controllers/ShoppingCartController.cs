@@ -41,6 +41,7 @@ namespace TiendaVirtual.Controllers
                 DeleteId = id
             };
             return Json(results);
+        }
 
             // Go back to the main store page for more shopping
             // return RedirectToAction("Index");
@@ -74,18 +75,15 @@ namespace TiendaVirtual.Controllers
             //        return Json(results);
             //    }
 
-            //     GET: /ShoppingCart/CartSummary
-            //    [ChildActionOnly]
-            //    public ActionResult CartSummary()
-            //    {
-            //        var cart = ShoppingCart.GetCart(this.HttpContext);
+        //
+        // GET: /ShoppingCart/Carrito
+        [ChildActionOnly]
+        public ActionResult Carrito()
+        {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            //        ViewData["CartCount"] = cart.GetCount();
-            //        return PartialView("CartSummary");
-            //    }
-
-
-
+            ViewData["CartCount"] = cart.GetCount();
+            return PartialView("Carrito");
         }
     }
 }

@@ -18,6 +18,7 @@ namespace TiendaVirtual.Models
         public tb_producto()
         {
             this.tb_detalle = new HashSet<tb_detalle>();
+            this.tb_carrito = new HashSet<tb_carrito>();
         }
     
         public int id_producto { get; set; }
@@ -33,5 +34,7 @@ namespace TiendaVirtual.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_detalle> tb_detalle { get; set; }
         public virtual tb_estado tb_estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_carrito> tb_carrito { get; set; }
     }
 }
