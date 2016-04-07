@@ -11,19 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id_producto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_producto)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.cantidad)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_carrito_user)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_carrito_user)
         </dd>
 
         <dt>
@@ -40,6 +40,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.tb_estado.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_producto.nombre_prod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_producto.nombre_prod)
         </dd>
 
     </dl>

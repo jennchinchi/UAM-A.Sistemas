@@ -14,28 +14,14 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: tb_categoria
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.tb_categoria.ToList());
         }
-
-        // GET: tb_categoria/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_categoria tb_categoria = db.tb_categoria.Find(id);
-            if (tb_categoria == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_categoria);
-        }
-
+        
         // GET: tb_categoria/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +32,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "id_categoria,descripcion")] tb_categoria tb_categoria)
         {
             if (ModelState.IsValid)
@@ -58,7 +45,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_categoria);
         }
 
-        // GET: tb_categoria/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +65,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "id_categoria,descripcion")] tb_categoria tb_categoria)
         {
             if (ModelState.IsValid)
@@ -88,33 +76,7 @@ namespace TiendaVirtual.Controllers
             }
             return View(tb_categoria);
         }
-
-        // GET: tb_categoria/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_categoria tb_categoria = db.tb_categoria.Find(id);
-            if (tb_categoria == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_categoria);
-        }
-
-        // POST: tb_categoria/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tb_categoria tb_categoria = db.tb_categoria.Find(id);
-            db.tb_categoria.Remove(tb_categoria);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -14,7 +14,7 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: tb_producto
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string busqueda)
         {
             if (String.IsNullOrEmpty(busqueda))
@@ -29,8 +29,8 @@ namespace TiendaVirtual.Controllers
             }
             
         }
-                
-        // GET: tb_producto/Details/5
+
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,7 +45,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_producto);
         }
 
-        // GET: tb_producto/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.id_categoria_prod = new SelectList(db.tb_categoria, "id_categoria", "descripcion");
@@ -58,6 +58,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen")] tb_producto tb_producto)
         {
             if (ModelState.IsValid)
@@ -72,7 +73,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_producto);
         }
 
-        // GET: tb_producto/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,6 +95,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen")] tb_producto tb_producto)
         {
             if (ModelState.IsValid)
@@ -106,33 +108,7 @@ namespace TiendaVirtual.Controllers
             ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion", tb_producto.id_estado);
             return View(tb_producto);
         }
-
-        // GET: tb_producto/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_producto tb_producto = db.tb_producto.Find(id);
-            if (tb_producto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_producto);
-        }
-
-        // POST: tb_producto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tb_producto tb_producto = db.tb_producto.Find(id);
-            db.tb_producto.Remove(tb_producto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

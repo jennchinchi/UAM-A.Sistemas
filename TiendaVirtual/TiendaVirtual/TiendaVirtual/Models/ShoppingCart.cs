@@ -33,11 +33,11 @@ namespace TiendaVirtual.Models
                 }
 
                 // Añadir item al carrito de la persona
-                public int AddToCart(tb_producto item,int id_persona)
+                public int AddToCart(tb_producto item)
                 {
                     // Get the matching cart and item instances
                     var cartItem = db.tb_carrito.SingleOrDefault(
-                        c => Convert.ToString(c.id_carrito) == ShoppingCartId
+                        c => c.id_carrito_user == ShoppingCartId
                         && c.id_producto == item.id_producto);
 
                     if (cartItem == null)
@@ -46,10 +46,10 @@ namespace TiendaVirtual.Models
                         cartItem = new tb_carrito
                         {
                             id_producto = item.id_producto,
-                            id_carrito = Convert.ToInt32(ShoppingCartId),
+                            id_carrito_user = ShoppingCartId,
                             cantidad = 1,
                             id_estado = 1,
-                            id_asociado= id_persona,
+                            id_asociado= 1,
                         };
                         db.tb_carrito.Add(cartItem);
                     }
@@ -115,7 +115,7 @@ namespace TiendaVirtual.Models
                 {
                     // Get the count of each item in the cart and sum them up
                     int? count = (from cartItems in db.tb_carrito
-                                  where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                                  where cartItems.id_carrito_user == ShoppingCartId
                                   select (int?)cartItems.cantidad).Sum();
                     // Return 0 if all entries are null
                     return count ?? 0;
@@ -128,7 +128,7 @@ namespace TiendaVirtual.Models
             // the current price for each of those items in the cart
             // sum all item price totals to get the cart total
             decimal? total = (from cartItems in db.tb_carrito
-                              where cartItems.id_carrito == Convert.ToInt32(ShoppingCartId)
+                              where cartItems.id_carrito_user == ShoppingCartId
                               select (int?)cartItems.cantidad *
                               cartItems.tb_producto.costo).Sum();
 
@@ -172,12 +172,16 @@ namespace TiendaVirtual.Models
 
         //        // Metodo que indica quien esta activo por el ID en el carrito de compras.
         public string GetCartId(HttpContextBase context)
-                {
-                    if (context.Session[CartSessionKey] == null)
+        {
+                if (context.Session[CartSessionKey+ context.User.Identity.Name] == null)
                     {
-                        if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
+                        if (context.Session[CartSessionKey] != null)
                         {
-                            context.Session[CartSessionKey] =
+                            context.Session[CartSessionKey + context.User.Identity.Name] = context.Session[CartSessionKey];
+                        }
+                        else if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
+                        {
+                            context.Session[CartSessionKey+ context.User.Identity.Name] =
                                 context.User.Identity.Name;
                         }
                         else
@@ -185,10 +189,10 @@ namespace TiendaVirtual.Models
                             // Generate a new random GUID using System.Guid class
                             Guid tempCartId = Guid.NewGuid();
                             // Send tempCartId back to client as a cookie
-                            context.Session[CartSessionKey] = tempCartId.ToString();
+                            context.Session[CartSessionKey+ context.User.Identity.Name] = tempCartId.ToString();
                         }
                     }
-                    return context.Session[CartSessionKey].ToString();
+                    return context.Session[CartSessionKey+ context.User.Identity.Name].ToString();
                 }
 
         //        // When a user has logged in, migrate their shopping cart to
