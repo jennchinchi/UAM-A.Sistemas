@@ -14,6 +14,7 @@ namespace TiendaVirtual.Controllers
     [Authorize]
     public class AccountController : Controller
     {   //variables para almacenar el user que esta activo
+        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -121,6 +122,9 @@ namespace TiendaVirtual.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                //Llama al Sp para la creacion del Rol de Cliente establecido por defecto.                
+                db.sp_asignar_rol(user.Id, "2");
+                db.SaveChanges();
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

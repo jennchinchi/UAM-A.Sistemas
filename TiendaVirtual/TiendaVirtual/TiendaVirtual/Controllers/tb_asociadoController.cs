@@ -14,29 +14,14 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: tb_asociado
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var tb_asociado = db.tb_asociado.Include(t => t.tb_estado).Include(t => t.tb_persona);
             return View(tb_asociado.ToList());
         }
 
-        // GET: tb_asociado/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_asociado tb_asociado = db.tb_asociado.Find(id);
-            if (tb_asociado == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_asociado);
-        }
-
-        // GET: tb_asociado/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion");
@@ -63,7 +48,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_asociado);
         }
 
-        // GET: tb_asociado/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,6 +70,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "id_asociado,id_persona,monto_ahorro,id_estado,correo_electronico")] tb_asociado tb_asociado)
         {
             if (ModelState.IsValid)
@@ -98,7 +84,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_asociado);
         }
 
-        // GET: tb_asociado/Delete/5
+        // Metodo para poner Inactivo un asociado
         public ActionResult Delete(int? id)
         {
             if (id == null)

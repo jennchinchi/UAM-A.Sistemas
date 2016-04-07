@@ -14,28 +14,13 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: tb_persona
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.tb_persona.ToList());
         }
 
-        // GET: tb_persona/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_persona tb_persona = db.tb_persona.Find(id);
-            if (tb_persona == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_persona);
-        }
-
-        // GET: tb_persona/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +31,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "cedula,fecha_nac,nombre,apellido,apellido2,telefono")] tb_persona tb_persona)
         {
             if (ModelState.IsValid)
@@ -58,7 +44,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_persona);
         }
 
-        // GET: tb_persona/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -78,6 +64,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "cedula,fecha_nac,nombre,apellido,apellido2,telefono")] tb_persona tb_persona)
         {
             if (ModelState.IsValid)
@@ -87,32 +74,6 @@ namespace TiendaVirtual.Controllers
                 return RedirectToAction("Index");
             }
             return View(tb_persona);
-        }
-
-        // GET: tb_persona/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_persona tb_persona = db.tb_persona.Find(id);
-            if (tb_persona == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_persona);
-        }
-
-        // POST: tb_persona/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            tb_persona tb_persona = db.tb_persona.Find(id);
-            db.tb_persona.Remove(tb_persona);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

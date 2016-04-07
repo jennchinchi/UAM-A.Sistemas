@@ -14,8 +14,7 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
-        // GET: tb_carrito
-
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string usuario)
         {
             if (String.IsNullOrEmpty(usuario))
@@ -30,21 +29,7 @@ namespace TiendaVirtual.Controllers
             }
         }
 
-        // GET: tb_carrito/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_carrito tb_carrito = db.tb_carrito.Find(id);
-            if (tb_carrito == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_carrito);
-        }
-
+        [Authorize(Roles = "admin,cliente")]
         // GET: tb_carrito/Create
         public ActionResult Create()
         {
@@ -59,6 +44,7 @@ namespace TiendaVirtual.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult Create([Bind(Include = "id_carrito,id_asociado,id_producto,cantidad,id_estado,id_carrito_user")] tb_carrito tb_carrito)
         {
             if (ModelState.IsValid)
@@ -73,45 +59,8 @@ namespace TiendaVirtual.Controllers
             ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod", tb_carrito.id_producto);
             return View(tb_carrito);
         }
-
-        // GET: tb_carrito/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_carrito tb_carrito = db.tb_carrito.Find(id);
-            if (tb_carrito == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.id_asociado = new SelectList(db.tb_asociado, "id_asociado", "id_persona", tb_carrito.id_asociado);
-            ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion", tb_carrito.id_estado);
-            ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod", tb_carrito.id_producto);
-            return View(tb_carrito);
-        }
-
-        // POST: tb_carrito/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_carrito,id_asociado,id_producto,cantidad,id_estado,id_carrito_user")] tb_carrito tb_carrito)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tb_carrito).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id_asociado = new SelectList(db.tb_asociado, "id_asociado", "id_persona", tb_carrito.id_asociado);
-            ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion", tb_carrito.id_estado);
-            ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod", tb_carrito.id_producto);
-            return View(tb_carrito);
-        }
-
-        // GET: tb_carrito/Delete/5
+        
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -126,7 +75,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_carrito);
         }
 
-        // POST: tb_carrito/Delete/5
+        [Authorize(Roles = "admin,cliente")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
