@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\rojum_000\Source\Repos\UAM-A.Sistemas - 2\TiendaVirtual\TiendaVirtual\TiendaVirtual\Models\ModelTiendaVirtual.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Oscar\Source\Repos\UAM-A.Sistemas\TiendaVirtual\TiendaVirtual\TiendaVirtual\Models\ModelTiendaVirtual.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
