@@ -29,7 +29,10 @@ namespace TiendaVirtual.Models
         public int id_categoria_prod { get; set; }
         public int id_estado { get; set; }
         public byte[] imagen { get; set; }
-    
+        public string imagen_url { get; set; }
+
+       
+
         public virtual tb_categoria tb_categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_detalle> tb_detalle { get; set; }

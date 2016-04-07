@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -58,7 +59,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen")] tb_producto tb_producto)
+        public ActionResult Create(tb_producto tb_producto)
         {
             if (ModelState.IsValid)
             {
@@ -131,6 +132,15 @@ namespace TiendaVirtual.Controllers
             db.tb_producto.Remove(tb_producto);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> RenderImage(int id)
+        {
+            tb_producto item = await db.tb_producto.FindAsync(id);
+
+            byte[] photoBack = item.imagen;
+
+            return File(photoBack, "image/png");
         }
 
         protected override void Dispose(bool disposing)

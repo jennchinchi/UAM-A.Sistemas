@@ -172,12 +172,16 @@ namespace TiendaVirtual.Models
 
         //        // Metodo que indica quien esta activo por el ID en el carrito de compras.
         public string GetCartId(HttpContextBase context)
-                {
-                    if (context.Session[CartSessionKey] == null)
+        {
+                if (context.Session[CartSessionKey+ context.User.Identity.Name] == null)
                     {
-                        if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
+                        if (context.Session[CartSessionKey] != null)
                         {
-                            context.Session[CartSessionKey] =
+                            context.Session[CartSessionKey + context.User.Identity.Name] = context.Session[CartSessionKey];
+                        }
+                        else if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
+                        {
+                            context.Session[CartSessionKey+ context.User.Identity.Name] =
                                 context.User.Identity.Name;
                         }
                         else
@@ -185,10 +189,10 @@ namespace TiendaVirtual.Models
                             // Generate a new random GUID using System.Guid class
                             Guid tempCartId = Guid.NewGuid();
                             // Send tempCartId back to client as a cookie
-                            context.Session[CartSessionKey] = tempCartId.ToString();
+                            context.Session[CartSessionKey+ context.User.Identity.Name] = tempCartId.ToString();
                         }
                     }
-                    return context.Session[CartSessionKey].ToString();
+                    return context.Session[CartSessionKey+ context.User.Identity.Name].ToString();
                 }
 
         //        // When a user has logged in, migrate their shopping cart to
