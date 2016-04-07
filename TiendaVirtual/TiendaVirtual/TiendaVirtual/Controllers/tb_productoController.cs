@@ -59,7 +59,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(tb_producto tb_producto)
+        public ActionResult Create([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen_url")] tb_producto tb_producto)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace TiendaVirtual.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen")] tb_producto tb_producto)
+        public ActionResult Edit([Bind(Include = "id_producto,nombre_prod,costo,cantidad,descripcion_prod,id_categoria_prod,id_estado,imagen_url")] tb_producto tb_producto)
         {
             if (ModelState.IsValid)
             {
