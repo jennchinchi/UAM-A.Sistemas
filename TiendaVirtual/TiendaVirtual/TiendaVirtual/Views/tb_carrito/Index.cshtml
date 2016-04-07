@@ -1,49 +1,46 @@
 ﻿@model IEnumerable<TiendaVirtual.Models.tb_carrito>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Carrito de Compra";
 }
 
-<h2>Index</h2>
+<h2>Artículos en el Carrito de Compras</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_producto)
+            @Html.DisplayName("Cantidad")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
+            @Html.DisplayName("Usuario")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tb_asociado.id_persona)
+            @Html.DisplayName("Prodcto")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tb_estado.descripcion)
+            @Html.DisplayName("Precio Unitario")
         </th>
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id_producto)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.cantidad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tb_asociado.id_persona)
+            @Html.DisplayFor(modelItem => item.id_carrito_user)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tb_estado.descripcion)
+            @Html.DisplayFor(modelItem => item.tb_producto.nombre_prod)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_carrito }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_carrito }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_carrito })
+            @Html.DisplayFor(modelItem => item.tb_producto.costo)
+        </td>
+        <td>
+            @Html.ActionLink("Facturar", "Details", new { id=item.id_carrito }) |
+            @Html.ActionLink("Eliminar del carrito", "Delete", new { id=item.id_carrito })
         </td>
     </tr>
 }
