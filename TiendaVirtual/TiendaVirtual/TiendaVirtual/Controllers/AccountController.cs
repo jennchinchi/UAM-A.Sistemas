@@ -173,7 +173,7 @@ namespace TiendaVirtual.Controllers
             return View(model);
         }
 
-        //
+        // Retorna la vista despues de olvidar la contraseña
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -181,7 +181,7 @@ namespace TiendaVirtual.Controllers
             return View();
         }
 
-        //
+        //verifica que el codigo sea correcto para setear el nuevo password
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
@@ -189,7 +189,7 @@ namespace TiendaVirtual.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
+        //Se lleva acabo el reset del password junto con varias medidas de seguridad  como la de no revelar que el usario no existe si se desea cambiar una password inexistente.
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -215,7 +215,7 @@ namespace TiendaVirtual.Controllers
             return View();
         }
 
-        //
+        // Se muestra la vista con la confirmacion de que la password se cambió con éxito
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -223,7 +223,7 @@ namespace TiendaVirtual.Controllers
             return View();
         }
 
-        //
+        //Permite el login anonimo de una persona sin cuenta
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -234,7 +234,7 @@ namespace TiendaVirtual.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
+        //verifica el login del usuario y retorna error si no es válido 
         // GET: /Account/SendCode
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
@@ -249,7 +249,7 @@ namespace TiendaVirtual.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
+        // Retorna la vista si el codigo de la cuenta ingresada es valido
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -342,7 +342,7 @@ namespace TiendaVirtual.Controllers
                 RedirectUri = redirectUri;
                 UserId = userId;
             }
-
+            // Constructores
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }
             public string UserId { get; set; }

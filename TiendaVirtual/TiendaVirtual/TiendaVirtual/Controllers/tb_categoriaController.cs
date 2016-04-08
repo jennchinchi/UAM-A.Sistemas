@@ -11,15 +11,15 @@ using TiendaVirtual.Models;
 namespace TiendaVirtual.Controllers
 {
     public class tb_categoriaController : Controller
-    {
+    {   // Instancia para llamar metodos de la base de datos
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
-
+        // muestra la lista de categorias
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.tb_categoria.ToList());
         }
-        
+        // crea la vista y la enseña
         // GET: tb_categoria/Create
         [Authorize(Roles = "admin")]
         public ActionResult Create()
@@ -30,6 +30,7 @@ namespace TiendaVirtual.Controllers
         // POST: tb_categoria/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        //Se guarda la lista creada y la retorna para mostrarla
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
@@ -44,7 +45,7 @@ namespace TiendaVirtual.Controllers
 
             return View(tb_categoria);
         }
-
+        // se edita la categoría
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
@@ -63,6 +64,7 @@ namespace TiendaVirtual.Controllers
         // POST: tb_categoria/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Se guarda lo que se editó y se muestra
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]

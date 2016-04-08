@@ -11,9 +11,9 @@ using TiendaVirtual.Models;
 namespace TiendaVirtual.Controllers
 {
     public class tb_carritoController : Controller
-    {
+    {   // Instancia para llamar metodos de la base de datos
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
-
+        // Se autoriza el rol que puede entrar a esta seccion así mismo se muestran las respectivas vistas para cada uno
         [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string usuario)
         {
@@ -28,7 +28,7 @@ namespace TiendaVirtual.Controllers
                 return View(tb_carrito.ToList());
             }
         }
-
+        // Se muestra la vista con el carrito junto con lo agregado a el.
         [Authorize(Roles = "admin,cliente")]
         // GET: tb_carrito/Create
         public ActionResult Create()
@@ -42,6 +42,7 @@ namespace TiendaVirtual.Controllers
         // POST: tb_carrito/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Se guarda el carrito y se sigue mostrando la vista del carrito
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin,cliente")]
@@ -59,7 +60,7 @@ namespace TiendaVirtual.Controllers
             ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod", tb_carrito.id_producto);
             return View(tb_carrito);
         }
-        
+        // se borra productos del carrito
         [Authorize(Roles = "admin,cliente")]
         public ActionResult Delete(int? id)
         {
@@ -74,7 +75,7 @@ namespace TiendaVirtual.Controllers
             }
             return View(tb_carrito);
         }
-
+        // Se confirma y se guarda el borrado del producto del carrito
         [Authorize(Roles = "admin,cliente")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
