@@ -363,6 +363,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_asignar_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="bd_tienda_virtual_dellModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -765,6 +769,10 @@
             <End Role="tb_producto" EntitySet="tb_producto" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
           </AssociationSet>
+          <FunctionImport Name="sp_asignar_rol">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1058,6 +1066,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="bd_tienda_virtual_dellModel.Store.sp_asignar_rol" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
