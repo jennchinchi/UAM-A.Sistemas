@@ -154,6 +154,7 @@
           <Property Name="id_categoria_prod" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="imagen" Type="varbinary(max)" />
+          <Property Name="imagen_url" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -562,6 +563,7 @@
           <NavigationProperty Name="tb_detalle" Relationship="Self.fk_tb_detalle_producto" FromRole="tb_producto" ToRole="tb_detalle" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_producto_estado" FromRole="tb_producto" ToRole="tb_estado" />
           <NavigationProperty Name="tb_carrito" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_producto" FromRole="tb_producto" ToRole="tb_carrito" />
+          <Property Name="imagen_url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -981,6 +983,7 @@
           <EntitySetMapping Name="tb_producto">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_producto">
               <MappingFragment StoreEntitySet="tb_producto">
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
                 <ScalarProperty Name="id_producto" ColumnName="id_producto" />
                 <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
                 <ScalarProperty Name="costo" ColumnName="costo" />

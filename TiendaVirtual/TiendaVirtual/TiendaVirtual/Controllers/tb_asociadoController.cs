@@ -11,16 +11,16 @@ using TiendaVirtual.Models;
 namespace TiendaVirtual.Controllers
 {
     public class tb_asociadoController : Controller
-    {
+    {   // Instancia para llamar metodos de la base de datos
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
-
+        // Muestra una vista con parametros específicos
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var tb_asociado = db.tb_asociado.Include(t => t.tb_estado).Include(t => t.tb_persona);
             return View(tb_asociado.ToList());
         }
-
+        // Se crea un asociado
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
@@ -32,6 +32,7 @@ namespace TiendaVirtual.Controllers
         // POST: tb_asociado/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Se agraga el asociado a la base de datos
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_asociado,id_persona,monto_ahorro,id_estado,correo_electronico")] tb_asociado tb_asociado)
@@ -47,7 +48,7 @@ namespace TiendaVirtual.Controllers
             ViewBag.id_persona = new SelectList(db.tb_persona, "cedula", "nombre", tb_asociado.id_persona);
             return View(tb_asociado);
         }
-
+        // Se edita el asociado agregado con anterioridad
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
@@ -68,6 +69,7 @@ namespace TiendaVirtual.Controllers
         // POST: tb_asociado/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        //  Se encarga de guardar lo editado
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
@@ -99,7 +101,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_asociado);
         }
 
-        // POST: tb_asociado/Delete/5
+        // POST: tb_asociado/Delete/5 Metodo para borrar un asociado y de una vez se guarda.
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
