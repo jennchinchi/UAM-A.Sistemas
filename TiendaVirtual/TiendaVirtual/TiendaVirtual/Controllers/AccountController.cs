@@ -143,7 +143,7 @@ namespace TiendaVirtual.Controllers
                     // retornar que el asociado no existe
                     result.Errors.GetType();
                     AddErrors(result);
-                    return View("Error");
+                    return View("Error_Registro");
                 }
                 
                 AddErrors(result); //Almacena error para mostrarlo en detalles
