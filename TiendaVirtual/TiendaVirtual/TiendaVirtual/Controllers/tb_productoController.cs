@@ -145,14 +145,17 @@ namespace TiendaVirtual.Controllers
             return RedirectToAction("Index");
         }
         //Se muestra la imagen del producto
-        public async Task<ActionResult> RenderImage(int id)
-        {
-            tb_producto item = await db.tb_producto.FindAsync(id);
 
-            byte[] photoBack = item.imagen_url;
+            // Hablar con Jen para revisar esto!!!
 
-            return File(photoBack, "image/png");
-        }
+        //public async Task<ActionResult> RenderImage(int id)
+        //{
+        //    tb_producto item = await db.tb_producto.FindAsync(id);
+
+        //    byte[] photoBack = item.imagen_url;
+
+        //    return File(photoBack, "image/png");
+        //}
 
         protected override void Dispose(bool disposing)
         {
