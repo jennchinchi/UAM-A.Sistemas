@@ -9,7 +9,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Crear un nuevo Registro", "Create")
+    @Html.ActionLink("Crear un nuevo Asociado", "Create")
 </p>
 <table class="table">
     <tr>
@@ -45,8 +45,7 @@
         </td>
         
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id_asociado }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_asociado })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_asociado }) 
         </td>
     </tr>
 }

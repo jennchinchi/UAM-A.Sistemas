@@ -66,6 +66,7 @@ namespace TiendaVirtual.Controllers
             return View(tb_asociado);
         }
 
+
         // POST: tb_asociado/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -86,31 +87,9 @@ namespace TiendaVirtual.Controllers
             return View(tb_asociado);
         }
 
-        // Metodo para poner Inactivo un asociado
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_asociado tb_asociado = db.tb_asociado.Find(id);
-            if (tb_asociado == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_asociado);
-        }
 
-        // POST: tb_asociado/Delete/5 Metodo para borrar un asociado y de una vez se guarda.
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tb_asociado tb_asociado = db.tb_asociado.Find(id);
-            db.tb_asociado.Remove(tb_asociado);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
+
 
         protected override void Dispose(bool disposing)
         {

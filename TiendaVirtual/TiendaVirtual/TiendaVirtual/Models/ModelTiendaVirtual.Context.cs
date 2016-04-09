@@ -35,13 +35,13 @@ namespace TiendaVirtual.Models
         public virtual DbSet<tb_estado> tb_estado { get; set; }
         public virtual DbSet<tb_factura> tb_factura { get; set; }
         public virtual DbSet<tb_persona> tb_persona { get; set; }
-        public virtual DbSet<tb_producto> tb_producto { get; set; }
         public virtual DbSet<tb_provincia> tb_provincia { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<tb_producto> tb_producto { get; set; }
     
         public virtual int sp_asignar_rol(string userId, string roleId)
         {
@@ -54,6 +54,28 @@ namespace TiendaVirtual.Models
                 new ObjectParameter("RoleId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_asignar_rol", userIdParameter, roleIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_buscar_correo_asosiado(string correo_electronico)
+        {
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("correo_electronico", correo_electronico) :
+                new ObjectParameter("correo_electronico", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_buscar_correo_asosiado", correo_electronicoParameter);
+        }
+    
+        public virtual int sp_asignar_rol1(string userId, string roleId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var roleIdParameter = roleId != null ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_asignar_rol1", userIdParameter, roleIdParameter);
         }
     }
 }
