@@ -67,10 +67,10 @@ namespace TiendaVirtual.Models
                 // Remover del carro
                 public int RemoveFromCart(int id_producto_remover)
                 {
-                    // Conseguir id del caarrito
+                    // Conseguir id del carrito
 
                     var cartItem = db.tb_carrito.Single(
-                        cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId)
+                        cart => cart.id_carrito_user == ShoppingCartId
                         && cart.id_producto == id_producto_remover);
 
                     int itemCount = 0;
@@ -108,7 +108,7 @@ namespace TiendaVirtual.Models
                 public List<tb_carrito> GetCartItems()
                 {
                     return db.tb_carrito.Where(
-                        cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId)).ToList();
+                        cart => cart.id_carrito_user == ShoppingCartId).ToList();
                 }
 
                 public int GetCount()
@@ -135,40 +135,40 @@ namespace TiendaVirtual.Models
             return total ?? decimal.Zero;
         }
 
-        //        public Order CreateOrder(Order order)
-        //        {
-        //            decimal orderTotal = 0;
-        //            order.OrderDetails = new List<OrderDetail>();
+        public tb_factura CreateOrder(tb_factura order)
+        {
+            decimal orderTotal = 0;
+            order.tb_detalle = new List<tb_detalle>();
 
-        //            var cartItems = GetCartItems();
-        //            // Iterate over the items in the cart, 
-        //            // adding the order details for each
-        //            foreach (var item in cartItems)
-        //            {
-        //                var orderDetail = new OrderDetail
-        //                {
-        //                    ItemId = item.ItemId,
-        //                    OrderId = order.OrderId,
-        //                    UnitPrice = item.Item.Price,
-        //                    Quantity = item.Count
-        //                };
-        //                // Set the order total of the shopping cart
-        //                orderTotal += (item.Count * item.Item.Price);
-        //                order.OrderDetails.Add(orderDetail);
-        //                storeDB.OrderDetails.Add(orderDetail);
+            var cartItems = GetCartItems();
+            // Iterate over the items in the cart, 
+            // adding the order details for each
+            foreach (var item in cartItems)
+            {
+                var orderDetail = new tb_detalle
+                {
+                    id_producto = item.id_producto,
+                    id_factura = order.id_factura,
+                    costo_total = item.tb_producto.costo,
+                    cantidad = item.cantidad
+                };
+                // Set the order total of the shopping cart
+                orderTotal += (item.cantidad * item.tb_producto.costo);
+                order.tb_detalle.Add(orderDetail);
+                db.tb_detalle.Add(orderDetail);
 
-        //            }
+            }
 
-        //           // Set the order's total to the orderTotal count
-        //            order.Total = orderTotal;
+            // Set the order's total to the orderTotal count
+            order.costo_total = orderTotal;
 
-        //            // Save the order
-        //            storeDB.SaveChanges();
-        //            // Empty the shopping cart
-        //            EmptyCart();
-        //            // Return the OrderId as the confirmation number
-        //            return order;
-        //        }
+            // Save the order
+            db.SaveChanges();
+            // Empty the shopping cart
+            EmptyCart();
+            // Return the OrderId as the confirmation number
+            return order;
+        }
 
         //        // Metodo que indica quien esta activo por el ID en el carrito de compras.
         public string GetCartId(HttpContextBase context)

@@ -421,7 +421,6 @@
     <Content Include="Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Views\AspNetRoles\Index.cshtml" />
     <Content Include="Views\tb_asociado\Create.cshtml" />
-    <Content Include="Views\tb_asociado\Delete.cshtml" />
     <Content Include="Views\tb_asociado\Edit.cshtml" />
     <Content Include="Views\tb_asociado\Index.cshtml" />
     <Content Include="Views\tb_categoria\Create.cshtml" />
@@ -439,6 +438,7 @@
     <Content Include="Views\tb_carrito\Details.cshtml" />
     <Content Include="Views\tb_carrito\Edit.cshtml" />
     <Content Include="Views\tb_carrito\Index.cshtml" />
+    <Content Include="Views\Shared\Error_Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
