@@ -72,7 +72,7 @@
           </Key>
           <Property Name="id_asociado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_persona" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="monto_ahorro" Type="money" Nullable="false" />
+          <Property Name="monto_ahorro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="correo_electronico" Type="nvarchar" MaxLength="100" />
           <Property Name="id_estado" Type="int" Nullable="false" />
         </EntityType>
@@ -461,7 +461,7 @@
           </Key>
           <Property Name="id_asociado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_persona" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="monto_ahorro" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="monto_ahorro" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_asociado" ToRole="tb_estado" />
           <NavigationProperty Name="tb_persona" Relationship="Self.fk_tb_asociado_persona" FromRole="tb_asociado" ToRole="tb_persona" />
