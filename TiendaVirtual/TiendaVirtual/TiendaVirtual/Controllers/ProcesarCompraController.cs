@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using TiendaVirtual.Configuracion;
 using TiendaVirtual.Models;
 using System;
 using System.Collections.Generic;
@@ -12,32 +10,28 @@ using System.Web.Mvc;
 namespace TiendaVirtual.Controllers
 {
     [Authorize]
-    public class CheckoutController : Controller
+    public class ProcesarCompraController : Controller
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
-        AppConfigurations appConfig = new AppConfigurations();
-
-        public List<String> CreditCardTypes { get { return appConfig.CreditCardType; } }
-
         //
-        // GET: /Checkout/AddressAndPayment
-        public ActionResult AddressAndPayment()
+        // GET: /ProcesarCompra/SaldoDisponible
+        [Authorize(Roles = "admin,cliente")]
+        public ActionResult SaldoDisponible()
         {
-            ViewBag.CreditCardTypes = CreditCardTypes;
-            var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
+            var asociado = db.tb_asociado.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
+            //var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
 
-            if (previousOrder != null)
-                return View(previousOrder);
+            if (asociado != null)
+                return View(asociado);
             else
                 return View();
         }
 
         //
-        // POST: /Checkout/AddressAndPayment
+        // POST: /ProcesarCompra/SaldoDisponible
         [HttpPost]
-        public async Task<ActionResult> AddressAndPayment(FormCollection values)
+        public async Task<ActionResult> SaldoDisponible(FormCollection values)
         {
-            ViewBag.CreditCardTypes = CreditCardTypes;
             string result = values[9];
 
             var order = new tb_factura();
@@ -98,8 +92,8 @@ namespace TiendaVirtual.Controllers
         }
 
         //
-        // GET: /Checkout/Complete
-        public ActionResult Complete(int id)
+        // GET: /ProcesarCompra/Completar
+        public ActionResult Completar(int id)
         {
             // Validate customer owns this order
             bool isValid = db.tb_factura.Any(
