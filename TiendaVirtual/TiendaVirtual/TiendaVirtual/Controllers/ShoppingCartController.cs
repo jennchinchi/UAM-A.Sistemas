@@ -11,10 +11,20 @@ namespace TiendaVirtual.Controllers
     public class ShoppingCartController : Controller
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
-        // GET: ShoppingCart
+        //
+        // GET: /ShoppingCart/
         public ActionResult Index()
         {
-            return View();
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            // Set up our ViewModel
+            var viewModel = new ShoppingCartViewModel
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            };
+            // Return the view
+            return View(viewModel);
         }
         //
         // GET: /Store/AddToCart/5
@@ -66,7 +76,7 @@ namespace TiendaVirtual.Controllers
             var results = new ShoppingCartRemoveViewModel
             {
                 Message = "One (1) " + Server.HtmlEncode(itemName) +
-                    " has been removed from your shopping cart.",
+                    " ha sido eliminado de su carrito.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
