@@ -74,7 +74,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                    <span class="glyphicon glyphicon-log-in"></span> Cuenta <b class="caret"><p>&nbsp;</p></b></a>
+                    <span class="glyphicon glyphicon-log-in"></span> Cuenta <b class="caret">&nbsp;</b></a>
                     <ul class="dropdown-menu">
                         <li>  @Html.Partial("_LoginPartial")</li>
                     </ul>
@@ -83,7 +83,8 @@
             <!--Opcion de Carrito-->
             <ul class="nav navbar-nav navbar-right">
                 <li class="btn-link">
-                    <a  href="~/tb_carrito/"><span class="glyphicon glyphicon-shopping-cart"></span> Ver <b class=""></b></a>
+                    @{Html.RenderAction("Carrito", "ShoppingCart");}
+                   <li><a href="~/tb_carrito/Index?usuario=@User.Identity.Name"></a></li>
                 </li>
             </ul>
             <p>&nbsp;</p>

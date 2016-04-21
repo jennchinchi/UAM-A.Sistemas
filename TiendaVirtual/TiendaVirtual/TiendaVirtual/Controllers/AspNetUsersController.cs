@@ -53,6 +53,7 @@ namespace TiendaVirtual.Controllers
             {
                 db.AspNetUsers.Add(aspNetUsers);
                 db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
 

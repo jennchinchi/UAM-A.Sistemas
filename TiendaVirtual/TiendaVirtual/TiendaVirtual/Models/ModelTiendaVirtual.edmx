@@ -153,7 +153,7 @@
           <Property Name="descripcion_prod" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="id_categoria_prod" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
-          <Property Name="imagen" Type="varbinary(max)" />
+          <Property Name="imagen_url" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -266,6 +266,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tb_carrito_tb_producto">
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
+          <End Role="tb_carrito" Type="Self.tb_carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_carrito">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_tb_detalle_factura">
           <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="1" />
           <End Role="tb_detalle" Type="Self.tb_detalle" Multiplicity="*" />
@@ -350,6 +362,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_asignar_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_buscar_correo_asosiado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="correo_electronico" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="bd_tienda_virtual_dellModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -397,6 +416,10 @@
           </AssociationSet>
           <AssociationSet Name="fk_tb_carrito_tb_asociado" Association="Self.fk_tb_carrito_tb_asociado">
             <End Role="tb_asociado" EntitySet="tb_asociado" />
+            <End Role="tb_carrito" EntitySet="tb_carrito" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_carrito_tb_producto" Association="Self.fk_tb_carrito_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_detalle_factura" Association="Self.fk_tb_detalle_factura">
@@ -458,6 +481,7 @@
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_carrito_tb_asociado" FromRole="tb_carrito" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_carrito" ToRole="tb_estado" />
           <Property Name="id_carrito_user" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_producto" FromRole="tb_carrito" ToRole="tb_producto" />
         </EntityType>
         <EntityType Name="tb_categoria">
           <Key>
@@ -465,7 +489,7 @@
           </Key>
           <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tb_producto" Relationship="Self.fk_tb_producto_categoria" FromRole="tb_categoria" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_producto_categoria" FromRole="tb_categoria" ToRole="tb_producto" />
         </EntityType>
         <EntityType Name="tb_detalle">
           <Key>
@@ -477,7 +501,7 @@
           <Property Name="cantidad" Type="Int32" Nullable="false" />
           <Property Name="costo_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="tb_factura" Relationship="Self.fk_tb_detalle_factura" FromRole="tb_detalle" ToRole="tb_factura" />
-          <NavigationProperty Name="tb_producto" Relationship="Self.fk_tb_detalle_producto" FromRole="tb_detalle" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_detalle_producto" FromRole="tb_detalle" ToRole="tb_producto" />
         </EntityType>
         <EntityType Name="tb_direccion">
           <Key>
@@ -498,7 +522,7 @@
           <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_estado" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_carrito" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_estado" ToRole="tb_carrito" />
-          <NavigationProperty Name="tb_producto" Relationship="Self.fk_tb_producto_estado" FromRole="tb_estado" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_producto_estado" FromRole="tb_estado" ToRole="tb_producto" />
         </EntityType>
         <EntityType Name="tb_factura">
           <Key>
@@ -524,22 +548,6 @@
           <Property Name="apellido2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_persona" FromRole="tb_persona" ToRole="tb_asociado" />
-        </EntityType>
-        <EntityType Name="tb_producto">
-          <Key>
-            <PropertyRef Name="id_producto" />
-          </Key>
-          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_prod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="costo" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="descripcion_prod" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_categoria_prod" Type="Int32" Nullable="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="tb_categoria" Relationship="Self.fk_tb_producto_categoria" FromRole="tb_producto" ToRole="tb_categoria" />
-          <NavigationProperty Name="tb_detalle" Relationship="Self.fk_tb_detalle_producto" FromRole="tb_producto" ToRole="tb_detalle" />
-          <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_producto_estado" FromRole="tb_producto" ToRole="tb_estado" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -609,18 +617,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_producto_categoria">
-          <End Role="tb_categoria" Type="Self.tb_categoria" Multiplicity="1" />
-          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_categoria">
-              <PropertyRef Name="id_categoria" />
-            </Principal>
-            <Dependent Role="tb_producto">
-              <PropertyRef Name="id_categoria_prod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_tb_detalle_factura">
           <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="1" />
           <End Role="tb_detalle" Type="Self.tb_detalle" Multiplicity="*" />
@@ -630,18 +626,6 @@
             </Principal>
             <Dependent Role="tb_detalle">
               <PropertyRef Name="id_factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_detalle_producto">
-          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
-          <End Role="tb_detalle" Type="Self.tb_detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_producto">
-              <PropertyRef Name="id_producto" />
-            </Principal>
-            <Dependent Role="tb_detalle">
-              <PropertyRef Name="id_producto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -657,18 +641,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_producto_estado">
-          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
-          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="tb_producto">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="bd_tienda_virtual_dellEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_asociado" EntityType="Self.tb_asociado" />
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" />
@@ -678,7 +650,6 @@
           <EntitySet Name="tb_estado" EntityType="Self.tb_estado" />
           <EntitySet Name="tb_factura" EntityType="Self.tb_factura" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" />
-          <EntitySet Name="tb_producto" EntityType="Self.tb_producto" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" />
           <AssociationSet Name="fk_tb_asociado_estado" Association="Self.fk_tb_asociado_estado">
             <End Role="tb_estado" EntitySet="tb_estado" />
@@ -700,25 +671,13 @@
             <End Role="tb_estado" EntitySet="tb_estado" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_producto_categoria" Association="Self.fk_tb_producto_categoria">
-            <End Role="tb_categoria" EntitySet="tb_categoria" />
-            <End Role="tb_producto" EntitySet="tb_producto" />
-          </AssociationSet>
           <AssociationSet Name="fk_tb_detalle_factura" Association="Self.fk_tb_detalle_factura">
             <End Role="tb_factura" EntitySet="tb_factura" />
-            <End Role="tb_detalle" EntitySet="tb_detalle" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_detalle_producto" Association="Self.fk_tb_detalle_producto">
-            <End Role="tb_producto" EntitySet="tb_producto" />
             <End Role="tb_detalle" EntitySet="tb_detalle" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_direccion_provincia" Association="Self.fk_tb_direccion_provincia">
             <End Role="tb_provincia" EntitySet="tb_provincia" />
             <End Role="tb_direccion" EntitySet="tb_direccion" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_producto_estado" Association="Self.fk_tb_producto_estado">
-            <End Role="tb_estado" EntitySet="tb_estado" />
-            <End Role="tb_producto" EntitySet="tb_producto" />
           </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="bd_tienda_virtual_dellModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="bd_tienda_virtual_dellModel.AspNetRoles" />
@@ -740,6 +699,34 @@
           <AssociationSet Name="AspNetUserRoles" Association="bd_tienda_virtual_dellModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="sp_asignar_rol">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_buscar_correo_asosiado" ReturnType="Collection(Int32)">
+          <Parameter Name="correo_electronico" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_asignar_rol1">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tb_producto" EntityType="bd_tienda_virtual_dellModel.tb_producto" />
+          <AssociationSet Name="fk_tb_carrito_tb_producto" Association="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_carrito" EntitySet="tb_carrito" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_producto_categoria" Association="bd_tienda_virtual_dellModel.fk_tb_producto_categoria">
+            <End Role="tb_categoria" EntitySet="tb_categoria" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_detalle_producto" Association="bd_tienda_virtual_dellModel.fk_tb_detalle_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_detalle" EntitySet="tb_detalle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_producto_estado" Association="bd_tienda_virtual_dellModel.fk_tb_producto_estado">
+            <End Role="tb_estado" EntitySet="tb_estado" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -846,6 +833,71 @@
           <End Type="bd_tienda_virtual_dellModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="bd_tienda_virtual_dellModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="tb_producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_prod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="costo" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_prod" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="id_categoria_prod" Type="Int32" Nullable="false" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <Property Name="imagen_url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_carrito" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_producto" FromRole="tb_producto" ToRole="tb_carrito" />
+          <NavigationProperty Name="tb_categoria" Relationship="bd_tienda_virtual_dellModel.fk_tb_producto_categoria" FromRole="tb_producto" ToRole="tb_categoria" />
+          <NavigationProperty Name="tb_detalle" Relationship="bd_tienda_virtual_dellModel.fk_tb_detalle_producto" FromRole="tb_producto" ToRole="tb_detalle" />
+          <NavigationProperty Name="tb_estado" Relationship="bd_tienda_virtual_dellModel.fk_tb_producto_estado" FromRole="tb_producto" ToRole="tb_estado" />
+        </EntityType>
+        <Association Name="fk_tb_carrito_tb_producto">
+          <End Type="bd_tienda_virtual_dellModel.tb_producto" Role="tb_producto" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_carrito" Role="tb_carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_carrito">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_producto_categoria">
+          <End Type="bd_tienda_virtual_dellModel.tb_categoria" Role="tb_categoria" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_producto" Role="tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_categoria_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_detalle_producto">
+          <End Type="bd_tienda_virtual_dellModel.tb_producto" Role="tb_producto" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_detalle" Role="tb_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_detalle">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_producto_estado">
+          <End Type="bd_tienda_virtual_dellModel.tb_estado" Role="tb_estado" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_producto" Role="tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -936,20 +988,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_producto">
-            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_producto">
-              <MappingFragment StoreEntitySet="tb_producto">
-                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
-                <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
-                <ScalarProperty Name="costo" ColumnName="costo" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="descripcion_prod" ColumnName="descripcion_prod" />
-                <ScalarProperty Name="id_categoria_prod" ColumnName="id_categoria_prod" />
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-                <ScalarProperty Name="imagen" ColumnName="imagen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_provincia">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_provincia">
               <MappingFragment StoreEntitySet="tb_provincia">
@@ -1021,6 +1059,22 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_buscar_correo_asosiado" FunctionName="bd_tienda_virtual_dellModel.Store.sp_buscar_correo_asosiado" />
+          <FunctionImportMapping FunctionImportName="sp_asignar_rol1" FunctionName="bd_tienda_virtual_dellModel.Store.sp_asignar_rol" />
+          <EntitySetMapping Name="tb_producto">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_producto">
+              <MappingFragment StoreEntitySet="tb_producto">
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="id_categoria_prod" ColumnName="id_categoria_prod" />
+                <ScalarProperty Name="descripcion_prod" ColumnName="descripcion_prod" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

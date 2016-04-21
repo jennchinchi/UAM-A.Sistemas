@@ -85,6 +85,14 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -198,6 +206,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ProcesarCompraController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\AspNetRolesController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
@@ -208,8 +217,10 @@
     <Compile Include="Controllers\tb_asociadoController.cs" />
     <Compile Include="Controllers\tb_carritoController.cs" />
     <Compile Include="Controllers\tb_categoriaController.cs" />
+    <Compile Include="Controllers\tb_facturaController.cs" />
     <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="Controllers\tb_productoController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -420,7 +431,6 @@
     <Content Include="Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Views\AspNetRoles\Index.cshtml" />
     <Content Include="Views\tb_asociado\Create.cshtml" />
-    <Content Include="Views\tb_asociado\Delete.cshtml" />
     <Content Include="Views\tb_asociado\Edit.cshtml" />
     <Content Include="Views\tb_asociado\Index.cshtml" />
     <Content Include="Views\tb_categoria\Create.cshtml" />
@@ -438,10 +448,14 @@
     <Content Include="Views\tb_carrito\Details.cshtml" />
     <Content Include="Views\tb_carrito\Edit.cshtml" />
     <Content Include="Views\tb_carrito\Index.cshtml" />
+    <Content Include="Views\Shared\Error_Registro.cshtml" />
+    <Content Include="Views\ShoppingCart\Carrito.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ProcesarCompra\SaldoDisponible.cshtml" />
+    <Content Include="Views\ProcesarCompra\Completar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

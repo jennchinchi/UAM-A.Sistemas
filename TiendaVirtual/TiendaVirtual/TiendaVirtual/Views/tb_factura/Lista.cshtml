@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_factura>
+
+@{
+    ViewBag.Title = "Listado de Facturas";
+}
+<div class="jumbotron">
+    <h2>Listado de Facturas</h2>
+</div>
+
+<p>
+    @if (User.IsInRole("admin"))
+    {
+    @Html.ActionLink("Crear un nuevo Registro", "Create")
+    }
+</p>
+@*-----------------------------------------Barra de busqueda-------------------------------------------*@
+@*<div class="bs-docs-section">
+    <div class="row">
+        @using (Html.BeginForm("Index", "tb_producto", FormMethod.Get))
+        {
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Find: </span>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-info btn-sm" value="busqueda" />
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>*@
+
+<table class="table">
+    <tr>
+        <th>
+            Id Factura
+        </th>
+        <th>
+            Costo Total
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_factura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costo_total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id_factura })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -15,7 +15,7 @@
                 // Perform the ajax post
                 $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
                     function (data) {
-                        $('#cart-status').text(data.CartCount);
+                        $('.cart-count').text(data.CartCount);
                     });
             }
         });
@@ -49,8 +49,11 @@
     <h4>Producto</h4>
     <hr />
     <dl class="dl-horizontal">
+        <img height="200" src="@Html.DisplayFor(model => model.imagen_url)" />
+    </dl>
+    <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombre_prod)
+            Nombre del Producto
         </dt>
 
         <dd>
@@ -58,7 +61,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.costo)
+            Costo del Producto ($)
         </dt>
 
         <dd>
@@ -66,7 +69,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cantidad)
+            Cantidad en Bodega
         </dt>
 
         <dd>
@@ -74,7 +77,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.descripcion_prod)
+            Breve Descripcion del Producto
         </dt>
 
         <dd>
@@ -82,15 +85,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.imagen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tb_categoria.descripcion)
+            Categoria a la cual pertenece
         </dt>
 
         <dd>
@@ -98,7 +93,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tb_estado.descripcion)
+            Estado del Producto
         </dt>
 
         <dd>
