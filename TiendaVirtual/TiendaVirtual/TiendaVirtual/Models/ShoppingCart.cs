@@ -95,7 +95,7 @@ namespace TiendaVirtual.Models
                 public void EmptyCart()
                 {
                     var cartItems = db.tb_carrito.Where(
-                        cart => cart.id_carrito == Convert.ToInt32(ShoppingCartId));
+                        cart => cart.id_carrito_user == ShoppingCartId);
 
                     foreach (var cartItem in cartItems)
                     {

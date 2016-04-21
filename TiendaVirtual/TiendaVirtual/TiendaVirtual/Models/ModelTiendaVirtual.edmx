@@ -102,7 +102,7 @@
           <Property Name="id_producto" Type="int" Nullable="false" />
           <Property Name="id_factura" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
-          <Property Name="costo_total" Type="money" Nullable="false" />
+          <Property Name="costo_total" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="tb_direccion">
           <Key>
@@ -128,8 +128,9 @@
           <Property Name="cliente_asociado" Type="int" Nullable="false" />
           <Property Name="id_direccion" Type="int" Nullable="false" />
           <Property Name="id_estado" Type="int" Nullable="false" />
-          <Property Name="costo_total" Type="money" Nullable="false" />
-          <Property Name="fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="costo_total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fecha" Type="datetime2" Precision="7" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -499,7 +500,7 @@
           <Property Name="id_producto" Type="Int32" Nullable="false" />
           <Property Name="id_factura" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="costo_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="costo_total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="tb_factura" Relationship="Self.fk_tb_detalle_factura" FromRole="tb_detalle" ToRole="tb_factura" />
           <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_detalle_producto" FromRole="tb_detalle" ToRole="tb_producto" />
         </EntityType>
@@ -532,10 +533,11 @@
           <Property Name="cliente_asociado" Type="Int32" Nullable="false" />
           <Property Name="id_direccion" Type="Int32" Nullable="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="costo_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="costo_total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_factura_asociado" FromRole="tb_factura" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_detalle" Relationship="Self.fk_tb_detalle_factura" FromRole="tb_factura" ToRole="tb_detalle" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha" Type="DateTime" Precision="7" />
+          <Property Name="usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -967,6 +969,7 @@
           <EntitySetMapping Name="tb_factura">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_factura">
               <MappingFragment StoreEntitySet="tb_factura">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_factura" ColumnName="id_factura" />
                 <ScalarProperty Name="cliente_asociado" ColumnName="cliente_asociado" />

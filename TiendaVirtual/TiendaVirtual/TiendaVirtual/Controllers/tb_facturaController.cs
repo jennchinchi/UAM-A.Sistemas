@@ -17,6 +17,25 @@ namespace TiendaVirtual.Controllers
     {
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
 
+        // GET: tb_factura/Lista
+        public ActionResult Lista()
+        {
+
+
+            var orders = from o in db.tb_factura
+                         select o;
+
+            var user = User.Identity.Name.ToString();
+
+            if (User.IsInRole("cliente"))
+            {
+                orders = orders.Where(f => f.usuario == user);
+            }
+
+            return View(orders);
+
+            //return View(await db.Orders.ToListAsync());
+        }
 
         // GET: Orders
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)

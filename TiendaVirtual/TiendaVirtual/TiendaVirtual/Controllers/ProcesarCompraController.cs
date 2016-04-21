@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using TiendaVirtual.Models;
+using TiendaVirtual.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace TiendaVirtual.Controllers
 {
@@ -19,10 +21,15 @@ namespace TiendaVirtual.Controllers
         public ActionResult SaldoDisponible()
         {
             var asociado = db.tb_asociado.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
             //var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
+            var compra = new ProcesarCompra();
+            compra.asociado = asociado;
+            compra.montoCompra = cart.GetTotal();
+            compra.saldo = asociado.monto_ahorro - cart.GetTotal();
 
             if (asociado != null)
-                return View(asociado);
+                return View(compra);
             else
                 return View();
         }
@@ -32,62 +39,41 @@ namespace TiendaVirtual.Controllers
         [HttpPost]
         public async Task<ActionResult> SaldoDisponible(FormCollection values)
         {
-            string result = values[9];
-
             var order = new tb_factura();
-            TryUpdateModel(order);
-            //order.CreditCard = result;
-
+            var asociado = db.tb_asociado.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            //var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
+            var compra = new ProcesarCompra();
+            compra.asociado = asociado;
+            compra.montoCompra = cart.GetTotal();
+            compra.saldo = asociado.monto_ahorro - cart.GetTotal();
             try
             {
-                order.usuario = User.Identity.Name;
+                order.cliente_asociado = asociado.id_asociado;
+                order.id_direccion = 1;
+                order.id_estado = 1;
+                order.costo_total = cart.GetTotal();
                 order.fecha = DateTime.Now;
-                var currentUserId = User.Identity.GetUserId();
+                order.usuario = asociado.correo_electronico;
 
-                //if (order.SaveInfo && !order.Username.Equals("guest@guest.com"))
-                //{
-
-                //    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                //    var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
-                //    var ctx = store.Context;
-                //    var currentUser = manager.FindById(User.Identity.GetUserId());
-
-                //    currentUser.Address = order.Address;
-                //    currentUser.City = order.City;
-                //    currentUser.Country = order.Country;
-                //    currentUser.State = order.State;
-                //    currentUser.Phone = order.Phone;
-                //    currentUser.PostalCode = order.PostalCode;
-                //    currentUser.FirstName = order.FirstName;
-
-                //    //Save this back
-                //    //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
-                //    //var result = await UserManager.UpdateAsync(currentUser);
-                //    await ctx.SaveChangesAsync();
-
-                //    await db.SaveChangesAsync();
-                //}
-
-
-                //Save Order
+                //Guardar Orden
                 db.tb_factura.Add(order);
-                await db.SaveChangesAsync();
-                //Process the order
-                var cart = ShoppingCart.GetCart(this.HttpContext);
+
+                asociado.monto_ahorro = (decimal)(asociado.monto_ahorro - order.costo_total);
+                db.SaveChanges();
+                //Procesar la orden
                 order = cart.CreateOrder(order);
 
 
-
-                //CheckoutController.SendOrderMessage(order.usuario, "Nueva Factura: " + order.id_factura);
-
-                return RedirectToAction("Completada",
+                return RedirectToAction("Completar",
                     new { id = order.id_factura });
 
             }
-            catch
+            catch(Exception e)
             {
                 //Invalid - redisplay with errors
-                return View(order);
+                compra.Message = "Hubo un error en la compra: " + e.Message;
+                return View(compra);
             }
         }
 
@@ -97,8 +83,7 @@ namespace TiendaVirtual.Controllers
         {
             // Validate customer owns this order
             bool isValid = db.tb_factura.Any(
-                o => o.id_factura == id &&
-                o.usuario == User.Identity.Name);
+                o => o.id_factura == id);
 
             if (isValid)
             {

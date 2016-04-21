@@ -58,6 +58,10 @@
                         <li><a href="~/tb_producto/Index?busqueda=Accesorios">Accesorios </a></li>
                     </ul>
                 </li>
+                @if (User.IsInRole("cliente"))
+                {
+                <li><a href="~/tb_factura/Lista">Mis Ordenes</a></li>
+                }
                 <!-- Categorias de Administrador con acceso al menu principal-->
                 @if (User.IsInRole("admin"))
                 {

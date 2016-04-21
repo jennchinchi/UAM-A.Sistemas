@@ -1,33 +1,56 @@
-﻿@model TiendaVirtual.Models.tb_asociado
+﻿@model TiendaVirtual.ViewModels.ProcesarCompra
 
 @{
     ViewBag.Title = "Saldo Disponible";
 }
+@using (Html.BeginForm(new { @class = "form-horizontal" }))
+{
+    <h2>Detalle de la compra</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Monto Disponible
+            </dt>
 
-<div class="col-lg-10">
-  <div class="well bs-component">
-    @using (Html.BeginForm(new { @class = "form-horizontal" }))
-    {
-       <h2>Address And Payment</h2>
-        <fieldset>
-            <legend>Shipping Information</legend>
+            <dd>
+                @Html.DisplayFor(model => model.asociado.monto_ahorro)
+            </dd>
 
+            <dt>
+                Total a pagar
+            </dt>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.monto_ahorro, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EditorFor(model => model.monto_ahorro, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            
-            <br>
+            <dd>
+                @Html.DisplayFor(model => model.montoCompra)
+            </dd>
 
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-8">
-                    <button type="submit" class="btn btn-primary">Submit Order &raquo;</button>
-                </div>
-            </div>
-        </fieldset>
-    }
-  </div>
-</div>
+            <dt>
+                Saldo Final
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.saldo)
+            </dd>
+        </dl>
+    </div>
+
+    <p>
+        @if (Model.Message.IsEmpty())
+        {
+            if (Request.IsAuthenticated && User.IsInRole("cliente") && Model.saldo > 0 && Model.montoCompra > 0)
+            {
+                <button type="submit" class="btn btn-primary">Comprar</button>
+            }
+            else
+            {
+                <span>Compra inválida.</span>
+            }
+            @Html.ActionLink("Ir atras <-", "Index", "ShoppingCart")
+        }
+        else
+        {
+                <span>@Html.DisplayFor(model => model.Message)</span>
+        }
+    </p>
+}
