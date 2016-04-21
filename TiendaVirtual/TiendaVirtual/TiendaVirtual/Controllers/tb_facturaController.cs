@@ -41,12 +41,12 @@ namespace TiendaVirtual.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                orders = orders.Where(s => s.usuario.ToUpper().Contains(searchString.ToUpper()));
+               // orders = orders.Where(s => s.usuario.ToUpper().Contains(searchString.ToUpper()));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    orders = orders.OrderByDescending(s => s.usuario);
+                  //  orders = orders.OrderByDescending(s => s.usuario);
                     break;
                 case "Price":
                     orders = orders.OrderBy(s => s.costo_total);
@@ -55,7 +55,7 @@ namespace TiendaVirtual.Controllers
                     orders = orders.OrderByDescending(s => s.costo_total);
                     break;
                 default:  // Name ascending 
-                    orders = orders.OrderBy(s => s.usuario);
+                   // orders = orders.OrderBy(s => s.usuario);
                     break;
             }
 

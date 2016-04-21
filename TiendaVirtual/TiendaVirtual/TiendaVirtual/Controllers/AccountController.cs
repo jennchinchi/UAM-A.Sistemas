@@ -122,11 +122,13 @@ namespace TiendaVirtual.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 //Llama al Sp para la creacion del Rol de Cliente establecido por defecto.                
 
                 // Verificar si el correo existe en asociado, para poder ser un cliente
-                if (db.sp_buscar_correo_asosiado(user.Email).Equals(1)) // si el correo existe
-                {   
+                if ( (db.sp_buscar_correo_asosiado(user.Email).Equals(1))) // si el correo existe
+                {
+          
                     // Asigna roll de cliente al usuario registrado
                     db.sp_asignar_rol(user.Id, "2");
                     db.SaveChanges();

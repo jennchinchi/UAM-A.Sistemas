@@ -40,7 +40,7 @@ namespace TiendaVirtual.Controllers
 
             try
             {
-                order.usuario = User.Identity.Name;
+               // order.usuario = User.Identity.Name;
                 order.fecha = DateTime.Now;
                 var currentUserId = User.Identity.GetUserId();
 
@@ -96,18 +96,19 @@ namespace TiendaVirtual.Controllers
         public ActionResult Completar(int id)
         {
             // Validate customer owns this order
-            bool isValid = db.tb_factura.Any(
-                o => o.id_factura == id &&
-                o.usuario == User.Identity.Name);
+            //bool isValid = db.tb_factura.Any(
+            //    o => o.id_factura == id &&
+            //   o.usuario == User.Identity.Name);
 
-            if (isValid)
-            {
-                return View(id);
-            }
-            else
-            {
-                return View("Error");
-            }
+            //if (isValid)
+            //{
+            //    return View(id);
+            //}
+            //else
+            //{
+               return View("Error");
+            //}
+
         }
         
     }
