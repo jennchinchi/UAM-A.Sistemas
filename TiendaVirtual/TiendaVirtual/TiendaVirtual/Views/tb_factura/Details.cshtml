@@ -2,31 +2,24 @@
 @{
     ViewBag.Title = "Detalle";
 }
-<h2>Details</h2>
+<h2>Detalles de la factura: @Html.DisplayFor(model => model.id_factura)</h2>
 <div>
-    <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id_factura)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.id_factura)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.costo_total)
+            Costo Total
         </dt>
         <dd>
             @Html.DisplayFor(model => model.costo_total)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+            Fecha
         </dt>
         <dd>
             @Html.DisplayFor(model => model.fecha)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.usuario)
+            Usuario
         </dt>
         <dd>
             @Html.DisplayFor(model => model.usuario)
@@ -55,6 +48,5 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_factura}) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Atrás", "Lista","tb_factura")
 </p>

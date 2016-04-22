@@ -26,7 +26,7 @@ namespace TiendaVirtual.Controllers
             var compra = new ProcesarCompra();
             compra.asociado = asociado;
             compra.montoCompra = cart.GetTotal();
-            compra.saldo = asociado.monto_ahorro - cart.GetTotal();
+            compra.saldo = (decimal) asociado.monto_ahorro - cart.GetTotal();
 
             if (asociado != null)
                 return View(compra);
@@ -46,7 +46,7 @@ namespace TiendaVirtual.Controllers
             var compra = new ProcesarCompra();
             compra.asociado = asociado;
             compra.montoCompra = cart.GetTotal();
-            compra.saldo = asociado.monto_ahorro - cart.GetTotal();
+            compra.saldo = (decimal)asociado.monto_ahorro - cart.GetTotal();
             try
             {
                 order.cliente_asociado = asociado.id_asociado;
@@ -60,7 +60,7 @@ namespace TiendaVirtual.Controllers
                 db.tb_factura.Add(order);
 
                 asociado.monto_ahorro = (decimal)(asociado.monto_ahorro - order.costo_total);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 //Procesar la orden
                 order = cart.CreateOrder(order);
 

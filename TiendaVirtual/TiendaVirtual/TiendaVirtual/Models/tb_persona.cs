@@ -11,7 +11,7 @@ namespace TiendaVirtual.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class tb_persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +21,6 @@ namespace TiendaVirtual.Models
         }
     
         public string cedula { get; set; }
-   
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime fecha_nac { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
