@@ -11,7 +11,7 @@ namespace TiendaVirtual.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class tb_asociado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +23,8 @@ namespace TiendaVirtual.Models
     
         public int id_asociado { get; set; }
         public string id_persona { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:##}")]
         public Nullable<decimal> monto_ahorro { get; set; }
         public int id_estado { get; set; }
         public string correo_electronico { get; set; }
