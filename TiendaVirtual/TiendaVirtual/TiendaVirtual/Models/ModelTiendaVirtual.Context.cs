@@ -54,15 +54,16 @@ namespace TiendaVirtual.Models
                 new ObjectParameter("RoleId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_asignar_rol", userIdParameter, roleIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> sp_buscar_correo_asosiado(string correo_electronico)
+        }+
+
+        //private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        public virtual int sp_buscar_correo_asosiado(string correo_electronico)
         {
             var correo_electronicoParameter = correo_electronico != null ?
                 new ObjectParameter("correo_electronico", correo_electronico) :
                 new ObjectParameter("correo_electronico", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_buscar_correo_asosiado", correo_electronicoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_buscar_correo_asosiado", correo_electronicoParameter);
         }
     
         public virtual int sp_asignar_rol1(string userId, string roleId)
