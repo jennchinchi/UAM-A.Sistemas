@@ -11,7 +11,7 @@ namespace TiendaVirtual.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class tb_producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +20,10 @@ namespace TiendaVirtual.Models
             this.tb_carrito = new HashSet<tb_carrito>();
             this.tb_detalle = new HashSet<tb_detalle>();
         }
-    
+
         public int id_producto { get; set; }
         public string nombre_prod { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:##}")]
         public decimal costo { get; set; }
         public int cantidad { get; set; }
         public string descripcion_prod { get; set; }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Tienda Virtual </title>
+    <title>@ViewBag.Title Tienda Virtual </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -66,7 +66,7 @@
                 @if (User.IsInRole("admin"))
                 {
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu Administrador<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú Administrador<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="~/PageAdmin/">Opciones de Administrador</a></li>
                     </ul>
@@ -107,6 +107,13 @@
                     <div class="row">
                         <div class="col-lg-4">
                             Diseño y Desarrollo por InfoSoluciones - @DateTime.Now.Year
+                        </div>
+                        <div class="col-lg-3 dl-horizontal">
+                            Compatible con Navegadores:
+                            <div>
+                                <img style="height: 45px;" src="http://www.iconsdb.com/icons/preview/gray/firefox-xxl.png" />
+                                <img style="height: 45px;" src="http://icons.iconarchive.com/icons/xenatt/minimalism/256/App-Chromium-icon.png" />
+                            </div>
                         </div>
                         <div class="col-lg-4">
                             <img class="center-block" style="height: 45px;" src="~/images/InfoSoluciones_3.JPG" />
