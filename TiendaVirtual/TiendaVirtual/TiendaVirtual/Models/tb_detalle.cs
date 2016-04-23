@@ -18,7 +18,7 @@ namespace TiendaVirtual.Models
         public int id_producto { get; set; }
         public int id_factura { get; set; }
         public int cantidad { get; set; }
-        public Nullable<decimal> costo_total { get; set; }
+        public decimal costo_total { get; set; }
     
         public virtual tb_factura tb_factura { get; set; }
         public virtual tb_producto tb_producto { get; set; }

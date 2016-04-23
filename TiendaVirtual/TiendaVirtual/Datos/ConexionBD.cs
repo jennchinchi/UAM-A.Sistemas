@@ -49,7 +49,7 @@ namespace Datos
         /// <returns></returns>
         public string ObtenerConexion()
         {
-            cadenaConexion = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            cadenaConexion = ConfigurationManager.ConnectionStrings["bd_tienda_virtual_dell"].ConnectionString;
             return cadenaConexion;
         }
 
@@ -61,7 +61,7 @@ namespace Datos
                 {
                     cnx.Open();
                     comando.Connection = cnx;
-                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.ExecuteNonQuery();
                     cnx.Close();
                 }
@@ -77,24 +77,26 @@ namespace Datos
             }
         }
 
-        public DataSet Consultar(SqlCommand comando, string nombreTabla)
+        public int Consulta_Valor(SqlCommand comando)
         {
-            SqlDataAdapter adaptador;
-            DataSet resultado = new DataSet();
 
             try
             {
-                using (cnx = new SqlConnection(cadenaConexion))
+                using (cnx = new SqlConnection(CadenaConexion))
                 {
                     cnx.Open();
-                    comando.Connection = cnx;
-                    comando.CommandType = CommandType.StoredProcedure;
 
-                    adaptador = new SqlDataAdapter(comando);
-                    adaptador.Fill(resultado, nombreTabla);
+                    comando.Connection = cnx;
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+                    int valor = (Int32)comando.ExecuteScalar();
+
                     cnx.Close();
+
+
+                    return valor;
                 }
-                return resultado;
             }
             catch (Exception ex)
             {
@@ -102,10 +104,12 @@ namespace Datos
             }
             finally
             {
+
                 if (cnx != null)
                     cnx.Dispose();
             }
         }
+
     }
 
 } //Fin de Clase Conexion DB

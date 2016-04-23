@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaVirtual", "TiendaVirtual\TiendaVirtual.csproj", "{EB82D4C4-23E2-4E18-8094-3A30784BE8F7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{17058378-3A27-4295-AFCF-2BE9EBC7FD8D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{A5180337-4A9A-4608-AAB3-137E4A734EA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +15,6 @@ Global
 		{EB82D4C4-23E2-4E18-8094-3A30784BE8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB82D4C4-23E2-4E18-8094-3A30784BE8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB82D4C4-23E2-4E18-8094-3A30784BE8F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17058378-3A27-4295-AFCF-2BE9EBC7FD8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17058378-3A27-4295-AFCF-2BE9EBC7FD8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17058378-3A27-4295-AFCF-2BE9EBC7FD8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17058378-3A27-4295-AFCF-2BE9EBC7FD8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5180337-4A9A-4608-AAB3-137E4A734EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5180337-4A9A-4608-AAB3-137E4A734EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5180337-4A9A-4608-AAB3-137E4A734EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5180337-4A9A-4608-AAB3-137E4A734EA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

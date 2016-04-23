@@ -18,8 +18,31 @@
         <div class="col-md-4">
             <h4>Opciones Productos</h4>
             <p><a href="http://localhost:1758/tb_producto/Index" class="btn btn-primary btn-block">Producto &raquo;</a></p>
-            <p><a href="http://localhost:1758/tb_categoria/Index" class="btn btn-primary btn-block">Categoria &raquo;</a></p>
+            <p><a href="http://localhost:1758/tb_categoria/Index" class="btn btn-primary btn-block">Categorias &raquo;</a></p>
+            <p><a @Html.Action("cargar_montos", "PageAdmin") class="btn btn-primary btn-block">Deposito Ahorro &raquo;</a></p>
         </div>
     </div>    
 </div>
 
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Se actualizo la informacion de Ahorro de los asociados</strong> Para p <a href="#" class="alert-link">dé click aqui</a>.
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirmar orden.</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea procesar compra o seguir comprando?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Procesar compra</button>
+            </div>
+        </div>
+    </div>
+</div>

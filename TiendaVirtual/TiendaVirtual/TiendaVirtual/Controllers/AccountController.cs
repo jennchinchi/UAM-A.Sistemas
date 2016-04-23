@@ -7,7 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TiendaVirtual.Models;
-
+using System.Data;
+using System.Data.SqlClient;
 
 namespace TiendaVirtual.Controllers
 {
@@ -17,6 +18,8 @@ namespace TiendaVirtual.Controllers
         private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        //ConexionBD obj_conn = new ConexionBD();
 
         //constructor de la clase login
         public AccountController()
@@ -111,7 +114,7 @@ namespace TiendaVirtual.Controllers
         {
             return View();
         }
-
+        
         // Metodo con el control de set de las variables del registro de un login
         [HttpPost]
         [AllowAnonymous]
@@ -122,22 +125,31 @@ namespace TiendaVirtual.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                //Llama al Sp para la creacion del Rol de Cliente establecido por defecto.                
 
-                // Verificar si el correo existe en asociado, para poder ser un cliente
-                if (db.sp_buscar_correo_asosiado(user.Email).Equals(1)) // si el correo existe
-                {   
-                    // Asigna roll de cliente al usuario registrado
-                    db.sp_asignar_rol(user.Id, "2");
-                    db.SaveChanges();
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    if (result.Succeeded)
+                    if (user.Email.Contains("@asodell.com"))
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        db.sp_asignar_rol_asodell(user.Id, "2");
+                        db.SaveChanges();
 
-                        return RedirectToAction("Index", "Home");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
+                    else
+                    {
+                        // retornar que el asociado no existe
+                        result.Errors.GetType();
+                        AddErrors(result);
+                        return View("Error_Registro");
+                    }
+
+                    return RedirectToAction("Index", "Home");
                 }
+
+
+                //}
                 else
                 {
                     // retornar que el asociado no existe
@@ -145,13 +157,14 @@ namespace TiendaVirtual.Controllers
                     AddErrors(result);
                     return View("Error_Registro");
                 }
-                
-                AddErrors(result); //Almacena error para mostrarlo en detalles
+
+                //AddErrors(result); //Almacena error para mostrarlo en detalles
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar la vista
             return View(model);
         }
+        
 
         //Llamado de la vista de olvido de contrasenna
         [AllowAnonymous]
@@ -314,9 +327,9 @@ namespace TiendaVirtual.Controllers
 
             base.Dispose(disposing);
         }
-
+        
         #region Aplicaciones auxiliares
-        // Se usa para la protección XSRF al agregar inicios de sesión externos
+            // Se usa para la protección XSRF al agregar inicios de sesión externos
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
