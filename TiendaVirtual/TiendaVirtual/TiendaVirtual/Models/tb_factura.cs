@@ -27,9 +27,10 @@ namespace TiendaVirtual.Models
         public decimal costo_total { get; set; }
         public System.DateTime fecha { get; set; }
         public string usuario { get; set; }
+        public string direccion { get; set; }
     
-        public virtual tb_asociado tb_asociado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_detalle> tb_detalle { get; set; }
+        public virtual tb_cliente tb_cliente { get; set; }
     }
 }

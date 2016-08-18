@@ -3,18 +3,113 @@
 @{
     ViewBag.Title = "Saldo Disponible";
 }
-@using (Html.BeginForm(new { @class = "form-horizontal" }))
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $("#saldo-disponible").submit(function (e) {
+            var num_tarjeta = $("#numTarjeta").val();
+            var codigo_seguridad = $("#codigoSeguridad").val();
+            var direccion = $("#direccion").val();
+            if (num_tarjeta != '' && codigo_seguridad != '' && direccion != '') {
+                $(".has-error").addClass("hidden");
+                return true;
+            }
+            else {
+                $(".has-error").removeClass("hidden");
+            }
+            return false;
+        });
+    });
+</script>
+
+@using (Html.BeginForm(null,null, FormMethod.Post, new { @id="saldo-disponible" }))
 {
     <h2>Detalle de la compra</h2>
     <div>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                Monto Disponible
+                Num Tarjeta
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.asociado.monto_ahorro)
+               @Html.TextBoxFor(m => m.numTarjeta, new { @class = "form-control" })
+            </dd>
+
+            <dt>
+                Tipo Tarjeta
+            </dt>
+
+            <dd>
+                @Html.DropDownListFor(model => model.tipoTarjeta,
+                new[]
+                {
+                    new SelectListItem{ Value = "1", Text = "Visa" },
+                    new SelectListItem{ Value = "2", Text = "MasterCard" },
+                    new SelectListItem{ Value = "3", Text = "American Express" }
+                })
+            </dd>
+            
+            <dt>
+                Código de Seguridad
+            </dt>
+
+            <dd>
+               @Html.TextBoxFor(m => m.codigoSeguridad, new { @class = "form-control" })
+            </dd>
+           
+            <dt>
+                Fecha Vencimiento
+            </dt>
+
+            <dd>
+                @Html.DropDownListFor(model => model.mesVence,
+                new[]
+                {
+                    new SelectListItem{ Value = "1", Text = "01" },
+                    new SelectListItem{ Value = "2", Text = "02" },
+                    new SelectListItem{ Value = "3", Text = "03" },
+                    new SelectListItem{ Value = "4", Text = "04" },
+                    new SelectListItem{ Value = "5", Text = "05" },
+                    new SelectListItem{ Value = "6", Text = "06" },
+                    new SelectListItem{ Value = "7", Text = "07" },
+                    new SelectListItem{ Value = "8", Text = "08" },
+                    new SelectListItem{ Value = "9", Text = "09" },
+                    new SelectListItem{ Value = "10", Text = "10" },
+                    new SelectListItem{ Value = "11", Text = "11" },
+                    new SelectListItem{ Value = "12", Text = "12" }
+                })
+              
+
+                @Html.DropDownListFor(model => model.annoVence,
+                new[]
+                {
+                    new SelectListItem{ Value = "1", Text = "2016" },
+                    new SelectListItem{ Value = "2", Text = "2017" },
+                    new SelectListItem{ Value = "3", Text = "2018" },
+                    new SelectListItem{ Value = "4", Text = "2019" },
+                    new SelectListItem{ Value = "5", Text = "2020" },
+                    new SelectListItem{ Value = "6", Text = "2021" },
+                    new SelectListItem{ Value = "7", Text = "2022" },
+                    new SelectListItem{ Value = "8", Text = "2023" },
+                    new SelectListItem{ Value = "9", Text = "2024" },
+                    new SelectListItem{ Value = "10", Text = "2025" },
+                    new SelectListItem{ Value = "11", Text = "2026" },
+                    new SelectListItem{ Value = "12", Text = "2027" },
+                    new SelectListItem{ Value = "13", Text = "2028" },
+                    new SelectListItem{ Value = "14", Text = "2029" },
+                    new SelectListItem{ Value = "15", Text = "2030" }
+                })
+            </dd>
+
+            <dt>
+                Dirección de envío
+            </dt>
+
+            <dd>
+                @Html.TextAreaFor(m => m.direccion, 10, 40, null)
             </dd>
 
             <dt>
@@ -25,32 +120,27 @@
                 @Html.DisplayFor(model => model.montoCompra)
             </dd>
 
-            <dt>
-                Saldo Final
-            </dt>
+            @*<dt>
+        Saldo Final
+    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.saldo)
-            </dd>
+    <dd>
+        @Html.DisplayFor(model => model.saldo)
+    </dd>*@
         </dl>
     </div>
 
     <p>
         @if (Model.Message.IsEmpty())
         {
-            if (Request.IsAuthenticated && User.IsInRole("cliente") && Model.saldo > 0 && Model.montoCompra > 0)
-            {
-                <button type="submit" class="btn btn-primary">Comprar</button>
-            }
-            else
-            {
-                <span>Compra inválida.</span>
-            }
+            <button type="submit" class="btn btn-primary" id="btn-comprar">Comprar</button>
             @Html.ActionLink("Ir atras <-", "Index", "ShoppingCart")
         }
         else
         {
                 <span>@Html.DisplayFor(model => model.Message)</span>
         }
+        <br>
+        <span class="hidden has-error alert-danger">Faltan campos por llenar</span>
     </p>
 }

@@ -11,17 +11,16 @@ namespace TiendaVirtual.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class tb_persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_persona()
         {
-            this.tb_asociado = new HashSet<tb_asociado>();
+            this.tb_cliente = new HashSet<tb_cliente>();
         }
     
         public string cedula { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime fecha_nac { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
@@ -29,6 +28,6 @@ namespace TiendaVirtual.Models
         public string telefono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_asociado> tb_asociado { get; set; }
+        public virtual ICollection<tb_cliente> tb_cliente { get; set; }
     }
 }

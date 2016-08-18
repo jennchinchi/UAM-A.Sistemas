@@ -66,17 +66,6 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="tb_asociado">
-          <Key>
-            <PropertyRef Name="id_asociado" />
-          </Key>
-          <Property Name="id_asociado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_persona" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="monto_ahorro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="salario" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="correo_electronico" Type="nvarchar" MaxLength="100" />
-          <Property Name="id_estado" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="tb_carrito">
           <Key>
             <PropertyRef Name="id_carrito" />
@@ -94,6 +83,17 @@
           </Key>
           <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_cliente">
+          <Key>
+            <PropertyRef Name="id_asociado" />
+          </Key>
+          <Property Name="id_asociado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_persona" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="monto_aprobado" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="numero_tarjeta" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="correo_electronico" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_detalle">
           <Key>
@@ -132,6 +132,7 @@
           <Property Name="costo_total" Type="money" Nullable="false" />
           <Property Name="fecha" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -220,30 +221,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_asociado_estado">
-          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_asociado_persona">
-          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_persona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_tb_carrito_estado">
           <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
           <End Role="tb_carrito" Type="Self.tb_carrito" Multiplicity="*" />
@@ -256,11 +233,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_carrito_tb_asociado">
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="1" />
+        <Association Name="fk_tb_carrito_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
           <End Role="tb_carrito" Type="Self.tb_carrito" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_asociado">
+            <Principal Role="tb_cliente">
               <PropertyRef Name="id_asociado" />
             </Principal>
             <Dependent Role="tb_carrito">
@@ -277,6 +254,30 @@
             </Principal>
             <Dependent Role="tb_carrito">
               <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_cliente_estado">
+          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="tb_cliente">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_cliente_persona">
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="1" />
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_persona">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="tb_cliente">
+              <PropertyRef Name="id_persona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,10 +318,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_tb_factura_asociado">
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="1" />
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
           <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_asociado">
+            <Principal Role="tb_cliente">
               <PropertyRef Name="id_asociado" />
             </Principal>
             <Dependent Role="tb_factura">
@@ -376,9 +377,9 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_asociado" EntityType="Self.tb_asociado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_cliente" EntityType="Self.tb_cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_detalle" EntityType="Self.tb_detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_direccion" EntityType="Self.tb_direccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_estado" EntityType="Self.tb_estado" Schema="dbo" store:Type="Tables" />
@@ -402,25 +403,25 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_asociado_estado" Association="Self.fk_tb_asociado_estado">
-            <End Role="tb_estado" EntitySet="tb_estado" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_asociado_persona" Association="Self.fk_tb_asociado_persona">
-            <End Role="tb_persona" EntitySet="tb_persona" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
           <AssociationSet Name="fk_tb_carrito_estado" Association="Self.fk_tb_carrito_estado">
             <End Role="tb_estado" EntitySet="tb_estado" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_carrito_tb_asociado" Association="Self.fk_tb_carrito_tb_asociado">
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
+          <AssociationSet Name="fk_tb_carrito_tb_cliente" Association="Self.fk_tb_carrito_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_carrito_tb_producto" Association="Self.fk_tb_carrito_tb_producto">
             <End Role="tb_producto" EntitySet="tb_producto" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_cliente_estado" Association="Self.fk_tb_cliente_estado">
+            <End Role="tb_estado" EntitySet="tb_estado" />
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_cliente_persona" Association="Self.fk_tb_cliente_persona">
+            <End Role="tb_persona" EntitySet="tb_persona" />
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_detalle_factura" Association="Self.fk_tb_detalle_factura">
             <End Role="tb_factura" EntitySet="tb_factura" />
@@ -435,7 +436,7 @@
             <End Role="tb_direccion" EntitySet="tb_direccion" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_factura_asociado" Association="Self.fk_tb_factura_asociado">
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
             <End Role="tb_factura" EntitySet="tb_factura" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_producto_categoria" Association="Self.fk_tb_producto_categoria">
@@ -455,21 +456,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bd_tienda_virtual_dellModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tb_asociado">
-          <Key>
-            <PropertyRef Name="id_asociado" />
-          </Key>
-          <Property Name="id_asociado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_persona" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="monto_ahorro" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_asociado" ToRole="tb_estado" />
-          <NavigationProperty Name="tb_persona" Relationship="Self.fk_tb_asociado_persona" FromRole="tb_asociado" ToRole="tb_persona" />
-          <NavigationProperty Name="tb_carrito" Relationship="Self.fk_tb_carrito_tb_asociado" FromRole="tb_asociado" ToRole="tb_carrito" />
-          <NavigationProperty Name="tb_factura" Relationship="Self.fk_tb_factura_asociado" FromRole="tb_asociado" ToRole="tb_factura" />
-          <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="salario" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="tb_carrito">
           <Key>
             <PropertyRef Name="id_carrito" />
@@ -479,10 +465,10 @@
           <Property Name="id_producto" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_carrito_tb_asociado" FromRole="tb_carrito" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_estado" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_carrito" ToRole="tb_estado" />
           <Property Name="id_carrito_user" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_producto" FromRole="tb_carrito" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_cliente" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_cliente" FromRole="tb_carrito" ToRole="tb_cliente" />
         </EntityType>
         <EntityType Name="tb_categoria">
           <Key>
@@ -521,9 +507,9 @@
           </Key>
           <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_estado" FromRole="tb_estado" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_carrito" Relationship="Self.fk_tb_carrito_estado" FromRole="tb_estado" ToRole="tb_carrito" />
           <NavigationProperty Name="tb_producto" Relationship="bd_tienda_virtual_dellModel.fk_tb_producto_estado" FromRole="tb_estado" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_cliente" Relationship="bd_tienda_virtual_dellModel.fk_tb_cliente_estado" FromRole="tb_estado" ToRole="tb_cliente" />
         </EntityType>
         <EntityType Name="tb_factura">
           <Key>
@@ -534,10 +520,11 @@
           <Property Name="id_direccion" Type="Int32" Nullable="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <Property Name="costo_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_factura_asociado" FromRole="tb_factura" ToRole="tb_asociado" />
           <NavigationProperty Name="tb_detalle" Relationship="Self.fk_tb_detalle_factura" FromRole="tb_factura" ToRole="tb_detalle" />
           <Property Name="fecha" Type="DateTime" Precision="7" Nullable="false" />
           <Property Name="usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_cliente" Relationship="bd_tienda_virtual_dellModel.fk_tb_factura_asociado1" FromRole="tb_factura" ToRole="tb_cliente" />
+          <Property Name="direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_persona">
           <Key>
@@ -549,7 +536,7 @@
           <Property Name="apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_asociado" Relationship="Self.fk_tb_asociado_persona" FromRole="tb_persona" ToRole="tb_asociado" />
+          <NavigationProperty Name="tb_cliente" Relationship="bd_tienda_virtual_dellModel.fk_tb_cliente_persona" FromRole="tb_persona" ToRole="tb_cliente" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -559,54 +546,6 @@
           <Property Name="nombre_provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tb_direccion" Relationship="Self.fk_tb_direccion_provincia" FromRole="tb_provincia" ToRole="tb_direccion" />
         </EntityType>
-        <Association Name="fk_tb_asociado_estado">
-          <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_asociado_persona">
-          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="1" />
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="tb_asociado">
-              <PropertyRef Name="id_persona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_carrito_tb_asociado">
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="1" />
-          <End Role="tb_carrito" Type="Self.tb_carrito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_asociado">
-              <PropertyRef Name="id_asociado" />
-            </Principal>
-            <Dependent Role="tb_carrito">
-              <PropertyRef Name="id_asociado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tb_factura_asociado">
-          <End Role="tb_asociado" Type="Self.tb_asociado" Multiplicity="1" />
-          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_asociado">
-              <PropertyRef Name="id_asociado" />
-            </Principal>
-            <Dependent Role="tb_factura">
-              <PropertyRef Name="cliente_asociado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_tb_carrito_estado">
           <End Role="tb_estado" Type="Self.tb_estado" Multiplicity="1" />
           <End Role="tb_carrito" Type="Self.tb_carrito" Multiplicity="*" />
@@ -643,8 +582,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bd_tienda_virtual_dellEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_asociado" EntityType="Self.tb_asociado" />
+        <EntityContainer Name="bd_tienda_virtual_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
           <EntitySet Name="tb_detalle" EntityType="Self.tb_detalle" />
@@ -653,22 +591,6 @@
           <EntitySet Name="tb_factura" EntityType="Self.tb_factura" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" />
-          <AssociationSet Name="fk_tb_asociado_estado" Association="Self.fk_tb_asociado_estado">
-            <End Role="tb_estado" EntitySet="tb_estado" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_asociado_persona" Association="Self.fk_tb_asociado_persona">
-            <End Role="tb_persona" EntitySet="tb_persona" />
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_carrito_tb_asociado" Association="Self.fk_tb_carrito_tb_asociado">
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-            <End Role="tb_carrito" EntitySet="tb_carrito" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tb_factura_asociado" Association="Self.fk_tb_factura_asociado">
-            <End Role="tb_asociado" EntitySet="tb_asociado" />
-            <End Role="tb_factura" EntitySet="tb_factura" />
-          </AssociationSet>
           <AssociationSet Name="fk_tb_carrito_estado" Association="Self.fk_tb_carrito_estado">
             <End Role="tb_estado" EntitySet="tb_estado" />
             <End Role="tb_carrito" EntitySet="tb_carrito" />
@@ -724,6 +646,23 @@
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="RoleId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tb_cliente" EntityType="bd_tienda_virtual_dellModel.tb_cliente" />
+          <AssociationSet Name="fk_tb_carrito_tb_cliente" Association="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_carrito" EntitySet="tb_carrito" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_cliente_estado" Association="bd_tienda_virtual_dellModel.fk_tb_cliente_estado">
+            <End Role="tb_estado" EntitySet="tb_estado" />
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_cliente_persona" Association="bd_tienda_virtual_dellModel.fk_tb_cliente_persona">
+            <End Role="tb_persona" EntitySet="tb_persona" />
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_factura_asociado1" Association="bd_tienda_virtual_dellModel.fk_tb_factura_asociado1">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -894,24 +833,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_cliente">
+          <Key>
+            <PropertyRef Name="id_asociado" />
+          </Key>
+          <Property Name="id_asociado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_persona" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="monto_aprobado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="numero_tarjeta" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_carrito" Relationship="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_cliente" FromRole="tb_cliente" ToRole="tb_carrito" />
+          <NavigationProperty Name="tb_estado" Relationship="bd_tienda_virtual_dellModel.fk_tb_cliente_estado" FromRole="tb_cliente" ToRole="tb_estado" />
+          <NavigationProperty Name="tb_persona" Relationship="bd_tienda_virtual_dellModel.fk_tb_cliente_persona" FromRole="tb_cliente" ToRole="tb_persona" />
+          <NavigationProperty Name="tb_factura" Relationship="bd_tienda_virtual_dellModel.fk_tb_factura_asociado1" FromRole="tb_cliente" ToRole="tb_factura" />
+        </EntityType>
+        <Association Name="fk_tb_carrito_tb_cliente">
+          <End Type="bd_tienda_virtual_dellModel.tb_cliente" Role="tb_cliente" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_carrito" Role="tb_carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_asociado" />
+            </Principal>
+            <Dependent Role="tb_carrito">
+              <PropertyRef Name="id_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_cliente_estado">
+          <End Type="bd_tienda_virtual_dellModel.tb_estado" Role="tb_estado" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_cliente" Role="tb_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="tb_cliente">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_cliente_persona">
+          <End Type="bd_tienda_virtual_dellModel.tb_persona" Role="tb_persona" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_cliente" Role="tb_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_persona">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="tb_cliente">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_factura_asociado1">
+          <End Type="bd_tienda_virtual_dellModel.tb_cliente" Role="tb_cliente" Multiplicity="1" />
+          <End Type="bd_tienda_virtual_dellModel.tb_factura" Role="tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_asociado" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="cliente_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bd_tienda_virtual_dellModelStoreContainer" CdmEntityContainer="bd_tienda_virtual_dellEntities">
-          <EntitySetMapping Name="tb_asociado">
-            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_asociado">
-              <MappingFragment StoreEntitySet="tb_asociado">
-                <ScalarProperty Name="salario" ColumnName="salario" />
-                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
-                <ScalarProperty Name="id_asociado" ColumnName="id_asociado" />
-                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
-                <ScalarProperty Name="monto_ahorro" ColumnName="monto_ahorro" />
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="bd_tienda_virtual_dellModelStoreContainer" CdmEntityContainer="bd_tienda_virtual_Entities">
           <EntitySetMapping Name="tb_carrito">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_carrito">
               <MappingFragment StoreEntitySet="tb_carrito">
@@ -964,6 +954,7 @@
           <EntitySetMapping Name="tb_factura">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_factura">
               <MappingFragment StoreEntitySet="tb_factura">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="usuario" ColumnName="usuario" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_factura" ColumnName="id_factura" />
@@ -1073,6 +1064,18 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_update_monto_asociados" FunctionName="bd_tienda_virtual_dellModel.Store.sp_update_monto_asociados" />
           <FunctionImportMapping FunctionImportName="sp_asignar_rol_asodell" FunctionName="bd_tienda_virtual_dellModel.Store.sp_asignar_rol" />
+          <EntitySetMapping Name="tb_cliente">
+            <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_cliente">
+              <MappingFragment StoreEntitySet="tb_cliente">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="numero_tarjeta" ColumnName="numero_tarjeta" />
+                <ScalarProperty Name="monto_aprobado" ColumnName="monto_aprobado" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="id_asociado" ColumnName="id_asociado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

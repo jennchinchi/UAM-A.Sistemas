@@ -13,7 +13,7 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_productoController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
         // Se filtra el producto que se quiere mostrar
         // GET: tb_producto
         [Authorize(Roles = "admin,cliente")]

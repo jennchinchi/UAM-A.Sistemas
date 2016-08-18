@@ -14,19 +14,19 @@ namespace TiendaVirtual.Controllers
     [Authorize]
     public class ProcesarCompraController : Controller
     {
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
         //
         // GET: /ProcesarCompra/SaldoDisponible
         [Authorize(Roles = "admin,cliente")]
         public ActionResult SaldoDisponible()
         {
-            var asociado = db.tb_asociado.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
+            var asociado = db.tb_cliente.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
             var cart = ShoppingCart.GetCart(this.HttpContext);
             //var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
             var compra = new ProcesarCompra();
             compra.asociado = asociado;
             compra.montoCompra = cart.GetTotal();
-            compra.saldo = (decimal) asociado.monto_ahorro - cart.GetTotal();
+            compra.saldo = (decimal) asociado.monto_aprobado - cart.GetTotal();
 
             if (asociado != null)
                 return View(compra);
@@ -40,39 +40,59 @@ namespace TiendaVirtual.Controllers
         public async Task<ActionResult> SaldoDisponible(FormCollection values)
         {
             var order = new tb_factura();
-            var asociado = db.tb_asociado.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
+            var asociado = db.tb_cliente.FirstOrDefault(a => a.correo_electronico == User.Identity.Name);
             var cart = ShoppingCart.GetCart(this.HttpContext);
             //var previousOrder = db.tb_factura.FirstOrDefault(x => x.usuario == User.Identity.Name);
             var compra = new ProcesarCompra();
             compra.asociado = asociado;
             compra.montoCompra = cart.GetTotal();
-            compra.saldo = (decimal)asociado.monto_ahorro - cart.GetTotal();
-            try
+            compra.saldo = (decimal)asociado.monto_aprobado - cart.GetTotal();
+            if (compra.montoCompra > 0)
             {
-                order.cliente_asociado = asociado.id_asociado;
-                order.id_direccion = 1;
-                order.id_estado = 1;
-                order.costo_total = cart.GetTotal();
-                order.fecha = DateTime.Now;
-                order.usuario = asociado.correo_electronico;
+                Random rnd = new Random();
+                int valor1 = ((int)compra.montoCompra) / 2;
+                int valor2 = (int) (compra.montoCompra * 2);
+                int monto = rnd.Next(valor1, valor2);
+                if (compra.montoCompra <= monto)
+                {
+                    try
+                    {
+                        order.cliente_asociado = asociado.id_asociado;
+                        order.id_direccion = 1;
+                        order.id_estado = 1;
+                        order.costo_total = cart.GetTotal();
+                        order.fecha = DateTime.Now;
+                        order.direccion = values["direccion"];
+                        order.usuario = asociado.correo_electronico;
 
-                //Guardar Orden
-                db.tb_factura.Add(order);
+                        //Guardar Orden
+                        db.tb_factura.Add(order);
 
-                asociado.monto_ahorro = (decimal)(asociado.monto_ahorro - order.costo_total);
-                await db.SaveChangesAsync();
-                //Procesar la orden
-                order = cart.CreateOrder(order);
+                        asociado.monto_aprobado = (decimal)(asociado.monto_aprobado - order.costo_total);
+                        await db.SaveChangesAsync();
+                        //Procesar la orden
+                        order = cart.CreateOrder(order);
 
 
-                return RedirectToAction("Completar",
-                    new { id = order.id_factura });
-
+                        return RedirectToAction("Completar",
+                        new { id = order.id_factura });
+                    }
+                    catch (Exception e)
+                    {
+                        //Invalid - redisplay with errors
+                        compra.Message = "Hubo un error en la compra: " + e.Message;
+                        return View(compra);
+                    }
+                }
+                else
+                {
+                    compra.Message = "Fondos insuficientes";
+                    return View(compra);
+                }
             }
-            catch(Exception e)
+            else
             {
-                //Invalid - redisplay with errors
-                compra.Message = "Hubo un error en la compra: " + e.Message;
+                compra.Message = "No existe nada disponible en el carrito para realizar compra";
                 return View(compra);
             }
         }
@@ -94,6 +114,5 @@ namespace TiendaVirtual.Controllers
                 return View("Error");
             }
         }
-        
     }
 }

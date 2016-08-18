@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e5fae5dd1974108b95c0859046786ca" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_asociado" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+      <Diagram DiagramId="3e5fae5dd1974108b95c0859046786ca" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_cliente" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_carrito" Width="1.5" PointX="10.25" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_categoria" Width="1.5" PointX="3.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_detalle" Width="1.5" PointX="12.5" PointY="7.75" IsExpanded="true" />
@@ -14,10 +14,6 @@
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_factura" Width="1.5" PointX="10.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_persona" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_tienda_virtual_dellModel.tb_provincia" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="true" />
-        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_asociado_estado" ManuallyRouted="false" />
-        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_asociado_persona" ManuallyRouted="false" />
-        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_asociado" ManuallyRouted="false" />
-        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_factura_asociado" ManuallyRouted="false" />
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_carrito_estado" ManuallyRouted="false" />
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_detalle_factura" ManuallyRouted="false" />
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_direccion_provincia" ManuallyRouted="false" />
@@ -35,6 +31,10 @@
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_producto_categoria" />
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_detalle_producto" />
         <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_producto_estado" />
+        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_carrito_tb_cliente" />
+        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_cliente_estado" />
+        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_cliente_persona" />
+        <AssociationConnector Association="bd_tienda_virtual_dellModel.fk_tb_factura_asociado1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

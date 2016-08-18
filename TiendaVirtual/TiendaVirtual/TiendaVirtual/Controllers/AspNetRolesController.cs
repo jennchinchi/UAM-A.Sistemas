@@ -11,7 +11,7 @@ namespace TiendaVirtual.Controllers
 {
     public class AspNetRolesController : Controller
     {   //instancia a la base de datos
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
 
         // retorna la vista con la lista de los roles
         public ActionResult Index()

@@ -15,10 +15,10 @@ namespace TiendaVirtual.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class bd_tienda_virtual_dellEntities : DbContext
+    public partial class bd_tienda_virtual_Entities : DbContext
     {
-        public bd_tienda_virtual_dellEntities()
-            : base("name=bd_tienda_virtual_dellEntities")
+        public bd_tienda_virtual_Entities()
+            : base("name=bd_tienda_virtual_Entities")
         {
         }
     
@@ -27,7 +27,6 @@ namespace TiendaVirtual.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_asociado> tb_asociado { get; set; }
         public virtual DbSet<tb_carrito> tb_carrito { get; set; }
         public virtual DbSet<tb_categoria> tb_categoria { get; set; }
         public virtual DbSet<tb_detalle> tb_detalle { get; set; }
@@ -42,6 +41,7 @@ namespace TiendaVirtual.Models
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<tb_producto> tb_producto { get; set; }
+        public virtual DbSet<tb_cliente> tb_cliente { get; set; }
     
         public virtual int sp_update_monto_asociados()
         {

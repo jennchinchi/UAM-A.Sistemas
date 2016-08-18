@@ -11,11 +11,11 @@ namespace TiendaVirtual.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    public partial class tb_asociado
+    
+    public partial class tb_cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_asociado()
+        public tb_cliente()
         {
             this.tb_carrito = new HashSet<tb_carrito>();
             this.tb_factura = new HashSet<tb_factura>();
@@ -23,16 +23,15 @@ namespace TiendaVirtual.Models
     
         public int id_asociado { get; set; }
         public string id_persona { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:##}")]
-        public decimal monto_ahorro { get; set; }
-        public int id_estado { get; set; }
+        public decimal monto_aprobado { get; set; }
+        public string numero_tarjeta { get; set; }
         public string correo_electronico { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:##}")]
-        public decimal salario { get; set; }
-        public virtual tb_estado tb_estado { get; set; }
-        public virtual tb_persona tb_persona { get; set; }
+        public int id_estado { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_carrito> tb_carrito { get; set; }
+        public virtual tb_estado tb_estado { get; set; }
+        public virtual tb_persona tb_persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_factura> tb_factura { get; set; }
     }

@@ -15,7 +15,7 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_facturaController : Controller
     {
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
 
         // GET: tb_factura/Lista
         public ActionResult Lista()

@@ -12,12 +12,12 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_asociadoController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
         // Muestra una vista con parametros específicos
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            var tb_asociado = db.tb_asociado.Include(t => t.tb_estado).Include(t => t.tb_persona);
+            var tb_asociado = db.tb_cliente.Include(t => t.tb_estado).Include(t => t.tb_persona);
             return View(tb_asociado.ToList());
         }
         // Se crea un asociado
@@ -35,11 +35,11 @@ namespace TiendaVirtual.Controllers
         // Se agraga el asociado a la base de datos
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_asociado,id_persona,monto_ahorro,id_estado,correo_electronico")] tb_asociado tb_asociado)
+        public ActionResult Create([Bind(Include = "id_asociado,id_persona,monto_aprobado,numero_tarjeta,id_estado,correo_electronico")] tb_cliente tb_asociado)
         {
             if (ModelState.IsValid)
             {
-                db.tb_asociado.Add(tb_asociado);
+                db.tb_cliente.Add(tb_asociado);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -56,7 +56,7 @@ namespace TiendaVirtual.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tb_asociado tb_asociado = db.tb_asociado.Find(id);
+            tb_cliente tb_asociado = db.tb_cliente.Find(id);
             if (tb_asociado == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace TiendaVirtual.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
-        public ActionResult Edit([Bind(Include = "id_asociado,id_persona,monto_ahorro,id_estado,correo_electronico")] tb_asociado tb_asociado)
+        public ActionResult Edit([Bind(Include = "id_asociado,id_persona,monto_aprobado,numero_tarjeta,id_estado,correo_electronico")] tb_cliente tb_asociado)
         {
             if (ModelState.IsValid)
             {

@@ -10,7 +10,7 @@ namespace TiendaVirtual.Models
     public partial class ShoppingCart
     {
                 /*Variable para llamar la base de datos */
-                private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+                private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
 
                 /*Variable para el ID del Carrito */
                 string ShoppingCartId { get; set; }

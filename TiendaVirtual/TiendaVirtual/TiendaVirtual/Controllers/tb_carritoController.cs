@@ -12,19 +12,19 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_carritoController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
         // Se autoriza el rol que puede entrar a esta seccion así mismo se muestran las respectivas vistas para cada uno
         [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string usuario)
         {
             if (String.IsNullOrEmpty(usuario))
             {
-                var tb_carrito = db.tb_carrito.Include(t => t.tb_asociado).Include(t => t.tb_estado).Include(t => t.tb_producto);
+                var tb_carrito = db.tb_carrito.Include(t => t.tb_cliente).Include(t => t.tb_estado).Include(t => t.tb_producto);
                 return View(tb_carrito.ToList());
             }
             else
             {
-                var tb_carrito = db.tb_carrito.Include(t => t.tb_asociado).Include(t => t.tb_estado).Include(t => t.tb_producto.costo).Where(t => t.id_carrito_user == usuario);
+                var tb_carrito = db.tb_carrito.Include(t => t.tb_cliente).Include(t => t.tb_estado).Include(t => t.tb_producto.costo).Where(t => t.id_carrito_user == usuario);
                 return View(tb_carrito.ToList());
             }
         }
@@ -33,7 +33,7 @@ namespace TiendaVirtual.Controllers
         // GET: tb_carrito/Create
         public ActionResult Create()
         {
-            ViewBag.id_asociado = new SelectList(db.tb_asociado, "id_asociado", "id_persona");
+            ViewBag.id_asociado = new SelectList(db.tb_cliente, "id_asociado", "id_persona");
             ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion");
             ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod");
             return View();
@@ -55,7 +55,7 @@ namespace TiendaVirtual.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_asociado = new SelectList(db.tb_asociado, "id_asociado", "id_persona", tb_carrito.id_asociado);
+            ViewBag.id_asociado = new SelectList(db.tb_cliente, "id_asociado", "id_persona", tb_carrito.id_asociado);
             ViewBag.id_estado = new SelectList(db.tb_estado, "id_estado", "descripcion", tb_carrito.id_estado);
             ViewBag.id_producto = new SelectList(db.tb_producto, "id_producto", "nombre_prod", tb_carrito.id_producto);
             return View(tb_carrito);

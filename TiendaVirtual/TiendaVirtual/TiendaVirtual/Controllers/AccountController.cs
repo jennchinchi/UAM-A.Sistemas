@@ -15,7 +15,7 @@ namespace TiendaVirtual.Controllers
     [Authorize]
     public class AccountController : Controller
     {   //variables para almacenar el user que esta activo
-        private bd_tienda_virtual_dellEntities db = new bd_tienda_virtual_dellEntities();
+        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 

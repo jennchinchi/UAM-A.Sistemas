@@ -258,13 +258,13 @@
       <DependentUpon>ModelTiendaVirtual.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="Models\tb_asociado.cs">
-      <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tb_carrito.cs">
       <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_categoria.cs">
+      <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_cliente.cs">
       <DependentUpon>ModelTiendaVirtual.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_detalle.cs">
@@ -376,6 +376,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
