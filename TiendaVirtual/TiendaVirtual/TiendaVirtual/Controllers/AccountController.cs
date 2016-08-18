@@ -130,7 +130,7 @@ namespace TiendaVirtual.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    if (user.Email.Contains("@asodell.com"))
+                    if (user.Email.Contains("@empresa.com"))
                     {
                         db.sp_asignar_rol_asodell(user.Id, "2");
                         db.SaveChanges();
