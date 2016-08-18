@@ -12,7 +12,7 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_personaController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
         // se enlista  las personas y se muestran
         [Authorize(Roles = "admin")]
         public ActionResult Index()

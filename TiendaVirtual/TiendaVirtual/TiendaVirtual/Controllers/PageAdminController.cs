@@ -9,7 +9,7 @@ namespace TiendaVirtual.Controllers
 {
     public class PageAdminController : Controller
     {
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
 
         [Authorize(Roles = "admin")]
         public ActionResult Index()

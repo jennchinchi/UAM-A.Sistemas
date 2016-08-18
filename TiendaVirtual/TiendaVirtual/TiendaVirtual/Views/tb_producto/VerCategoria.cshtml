@@ -8,9 +8,9 @@
 </div>
 
 <p>
-        @if (User.IsInRole("admin"))
-        {
-            
+    @if (User.IsInRole("admin"))
+    {
+
         @Html.DropDownList("cod_cat", null, new { @onchange = "VerCategoria(this.value)" })
 
         <script>
@@ -19,9 +19,10 @@
 
         @Html.ActionLink("Crear un nuevo Registro", "Create")
 
-        }
+    }
 
 </p>
+
 @*-----------------------------------------Barra de busqueda-------------------------------------------*@
 @*<div class="bs-docs-section">
     <div class="row">

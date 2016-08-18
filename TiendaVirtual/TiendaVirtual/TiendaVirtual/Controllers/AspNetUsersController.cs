@@ -13,7 +13,7 @@ namespace TiendaVirtual.Controllers
 {
     public class AspNetUsersController : Controller
     {
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
 
         // GET: AspNetUsers
         public ActionResult Index()

@@ -582,7 +582,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bd_tienda_virtual_Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="bd_tienda_virtual" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_carrito" EntityType="Self.tb_carrito" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
           <EntitySet Name="tb_detalle" EntityType="Self.tb_detalle" />
@@ -901,7 +901,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bd_tienda_virtual_dellModelStoreContainer" CdmEntityContainer="bd_tienda_virtual_Entities">
+        <EntityContainerMapping StorageEntityContainer="bd_tienda_virtual_dellModelStoreContainer" CdmEntityContainer="bd_tienda_virtual">
           <EntitySetMapping Name="tb_carrito">
             <EntityTypeMapping TypeName="bd_tienda_virtual_dellModel.tb_carrito">
               <MappingFragment StoreEntitySet="tb_carrito">

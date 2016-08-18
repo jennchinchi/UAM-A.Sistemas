@@ -14,7 +14,7 @@ namespace TiendaVirtual.Controllers
     [Authorize]
     public class ProcesarCompraController : Controller
     {
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
         //
         // GET: /ProcesarCompra/SaldoDisponible
         [Authorize(Roles = "admin,cliente")]

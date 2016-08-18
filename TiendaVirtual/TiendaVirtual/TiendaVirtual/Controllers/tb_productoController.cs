@@ -13,12 +13,14 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_productoController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
         // Se filtra el producto que se quiere mostrar
         // GET: tb_producto
         [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string busqueda)
         {
+            ViewBag.cod_cat = new SelectList(db.tb_categoria, "id_categoria", "descripcion");
+            
             if (String.IsNullOrEmpty(busqueda))
             {
                 var tb_producto = db.tb_producto.Include(t => t.tb_categoria).Include(t => t.tb_estado);
@@ -31,6 +33,18 @@ namespace TiendaVirtual.Controllers
             }
             
         }
+
+        public ActionResult VerCategoria(int categoria)
+        {
+            ViewBag.cod_cat = new SelectList(db.tb_categoria, "id_categoria", "descripcion");
+
+            var _tb_producto = from aux in db.tb_producto
+                               where aux.id_categoria_prod == categoria
+                               select aux;
+            return View(_tb_producto.ToList());
+
+        }
+
         // se muestran los detalles del producto 
         // GET: tb_producto/Details/5
         [Authorize(Roles = "admin,cliente")]

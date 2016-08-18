@@ -15,10 +15,10 @@ namespace TiendaVirtual.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class bd_tienda_virtual_Entities : DbContext
+    public partial class bd_tienda_virtual : DbContext
     {
-        public bd_tienda_virtual_Entities()
-            : base("name=bd_tienda_virtual_Entities")
+        public bd_tienda_virtual()
+            : base("name=bd_tienda_virtual")
         {
         }
     

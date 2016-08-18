@@ -460,6 +460,7 @@
     <Content Include="Views\tb_factura\Index.cshtml" />
     <Content Include="Views\tb_factura\Lista.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Views\tb_producto\VerCategoria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

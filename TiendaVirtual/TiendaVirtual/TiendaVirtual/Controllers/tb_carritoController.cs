@@ -12,7 +12,7 @@ namespace TiendaVirtual.Controllers
 {
     public class tb_carritoController : Controller
     {   // Instancia para llamar metodos de la base de datos
-        private bd_tienda_virtual_Entities db = new bd_tienda_virtual_Entities();
+        private bd_tienda_virtual db = new bd_tienda_virtual();
         // Se autoriza el rol que puede entrar a esta seccion así mismo se muestran las respectivas vistas para cada uno
         [Authorize(Roles = "admin,cliente")]
         public ActionResult Index(string usuario)
