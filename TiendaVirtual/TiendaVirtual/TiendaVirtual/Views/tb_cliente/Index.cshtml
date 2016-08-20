@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TiendaVirtual.Models.tb_cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre")
+        </th>
+        <th>
+            @Html.DisplayName("Monto")
+        </th>
+        <th>
+            @Html.DisplayName("Tarjeta")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Descripción")
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_persona.nombre)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.monto_aprobado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero_tarjeta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo_electronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_estado.descripcion)
+        </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_asociado }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_asociado }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.id_asociado })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model TiendaVirtual.Models.tb_cliente
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tb_cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.monto_aprobado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto_aprobado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_tarjeta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_tarjeta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo_electronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo_electronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_estado.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_estado.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_persona.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_persona.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

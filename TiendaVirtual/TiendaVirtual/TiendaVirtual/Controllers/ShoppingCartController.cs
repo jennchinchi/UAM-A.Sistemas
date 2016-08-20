@@ -31,26 +31,37 @@ namespace TiendaVirtual.Controllers
         [HttpPost]
         public ActionResult AddToCart(int id)
         {
-            // Retrieve the item from the database
-            var addedItem = db.tb_producto
-                .Single(item => item.id_producto == id);
 
-            // Add it to the shopping cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cantidad_inventario = from cust in db.tb_producto
+                           where cust.id_producto == id
+                            select cust.cantidad;
 
-            int count = cart.AddToCart(addedItem);
+            // Valida si la cantidad del item es mayor a uno
+            if ( cantidad_inventario.FirstOrDefault() >= 1 ) {
 
-            // Display the confirmation message
-            var results = new ShoppingCartRemoveViewModel
-            {
-                Message = Server.HtmlEncode(addedItem.nombre_prod) +
-                    " has been added to your shopping cart.",
-                CartTotal = cart.GetTotal(),
-                CartCount = cart.GetCount(),
-                ItemCount = count,
-                DeleteId = id
-            };
-            return Json(results);
+                // Retrieve the item from the database
+                var addedItem = db.tb_producto
+                    .Single(item => item.id_producto == id);
+
+                // Add it to the shopping cart
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+
+                int count = cart.AddToCart(addedItem);
+
+                // Display the confirmation message
+                var results = new ShoppingCartRemoveViewModel
+                {
+                    Message = Server.HtmlEncode(addedItem.nombre_prod) +
+                        " ha sido eliminado de su carrito.",
+                    CartTotal = cart.GetTotal(),
+                    CartCount = cart.GetCount(),
+                    ItemCount = count,
+                    DeleteId = id
+                };
+                return Json(results);
+            }
+            else
+                return Redirect("Error_Prod_Fuera_Inventario");
         }
 
         // Go back to the main store page for more shopping

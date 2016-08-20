@@ -114,55 +114,58 @@ namespace TiendaVirtual.Controllers
         {
             return View();
         }
-        
+
         // Metodo con el control de set de las variables del registro de un login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
             if (ModelState.IsValid) //si es valido lo almacena en el model de la db y procede a redirigir a home con el get del userSignIn
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                var email_regisrado = from cust in db.tb_cliente
+                                      where cust.correo_electronico == user.Email
+                                      select cust.correo_electronico;
+
+                if (email_regisrado.FirstOrDefault() != null )
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    if (user.Email.Contains("@empresa.com"))
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
                     {
-                        db.sp_asignar_rol_asodell(user.Id, "2");
-                        db.SaveChanges();
-
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        if (user.Email.Contains("@empresa.com"))
+                        {
+                            db.sp_asignar_rol_asodell(user.Id, "2");
+                            db.SaveChanges();
+
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        }
+                        else
+                        {
+                            // retornar que el asociado no existe
+                            result.Errors.GetType();
+                            AddErrors(result);
+                            return View("Error_Registro");
+                        }
                     }
                     else
                     {
-                        // retornar que el asociado no existe
-                        result.Errors.GetType();
-                        AddErrors(result);
                         return View("Error_Registro");
                     }
-
                     return RedirectToAction("Index", "Home");
                 }
-
-
-                //}
                 else
                 {
-                    // retornar que el asociado no existe
-                    result.Errors.GetType();
-                    AddErrors(result);
                     return View("Error_Registro");
                 }
-
-                //AddErrors(result); //Almacena error para mostrarlo en detalles
             }
 
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar la vista
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
         
 

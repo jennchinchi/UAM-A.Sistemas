@@ -217,6 +217,7 @@
     <Compile Include="Controllers\tb_asociadoController.cs" />
     <Compile Include="Controllers\tb_carritoController.cs" />
     <Compile Include="Controllers\tb_categoriaController.cs" />
+    <Compile Include="Controllers\tb_clienteController.cs" />
     <Compile Include="Controllers\tb_facturaController.cs" />
     <Compile Include="Controllers\tb_personaController.cs" />
     <Compile Include="Controllers\tb_productoController.cs" />
@@ -461,6 +462,12 @@
     <Content Include="Views\tb_factura\Lista.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Views\tb_producto\VerCategoria.cshtml" />
+    <Content Include="Views\tb_cliente\Create.cshtml" />
+    <Content Include="Views\tb_cliente\Delete.cshtml" />
+    <Content Include="Views\tb_cliente\Details.cshtml" />
+    <Content Include="Views\tb_cliente\Edit.cshtml" />
+    <Content Include="Views\tb_cliente\Index.cshtml" />
+    <Content Include="Views\Shared\Error_Prod_Fuera_Inventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
